@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane minHeight="300.0" minWidth="400.0" style="-fx-background-color: #000000;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TextField layoutX="109.0" layoutY="168.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="149.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font name="Avenir Next Regular" size="22.0" />
+         </font>
+      </Text>
+      <Text fill="#eeeeee" layoutX="87.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Album Log-in">
+         <font>
+            <Font name="Avenir Next Heavy" size="22.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
