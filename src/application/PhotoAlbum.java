@@ -21,6 +21,7 @@ public class PhotoAlbum extends Application {
 		primaryStage.setTitle("Photo Album Log in");
 		primaryStage.setResizable(false);  
 		primaryStage.show();
+		
 	}
 
 	public static void main(String[] args) {
