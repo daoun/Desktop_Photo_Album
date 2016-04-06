@@ -16,4 +16,8 @@ public class User {
 		this.name = name;
 	}
 	
+	public String toString(){
+		return name;
+	}
+	
 }
