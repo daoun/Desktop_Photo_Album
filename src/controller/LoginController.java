@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable{
+	
 	@FXML private Button loginBtn;
 	@FXML private TextField usernameTF;
 	@FXML private AnchorPane loginStage;
