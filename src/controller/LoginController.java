@@ -23,7 +23,29 @@ public class LoginController implements Initializable{
 	
 	public void LoginBtn(ActionEvent e){
 		if(usernameTF.getText().equals("admin")){
-			
+			try {
+				
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource("/view/admin.fxml"));
+				
+				AnchorPane root = (AnchorPane)loader.load();
+				//Stage currentStage = (Stage) loginStage.getScene().getWindow();
+	        	
+				Stage stage = new Stage();
+	            Scene scene = new Scene(root);
+				
+	            stage.setScene(scene);  
+	            stage.setResizable(false);  
+	            stage.setTitle("Admin Page");
+	            
+	            stage.show();
+	            //currentStage.close();
+	            
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		else{
 			username = usernameTF.getText();

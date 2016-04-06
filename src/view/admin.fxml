@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" id="adminStage" fx:controller="controller.AdminController">
+   
+   <children>
+      <Text fill="WHITE" layoutX="-65.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" textAlignment="CENTER" wrappingWidth="445.5343725681305">
+         <font>
+            <Font name="Avenir Roman" size="30.0" />
+         </font>
+      </Text>
+      <Button fx:id="addUser" onAction="#addUser" layoutX="20.0" mnemonicParsing="false" style="-fx-background-color: black;" text="+" textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteUser" onAction="#deleteUser" layoutX="618.0" layoutY="5.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="62.0" style="-fx-background-color: black;" text="x" textFill="WHITE">
+         <font>
+            <Font name="Calibri" size="32.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Button>
+      <ListView layoutY="81.0" prefHeight="359.0" prefWidth="680.0" style="-fx-padding: 50; -fx-background-color: white;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0"> 
+      
+      </ListView>
+   </children>
 </AnchorPane>
-
