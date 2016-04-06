@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,16 +18,17 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable{
 	@FXML private Button loginBtn;
 	@FXML private TextField usernameTF;
-	
 	@FXML private AnchorPane loginStage;
+	
+	public static String username = "login";
 	
 	public void LoginBtn(ActionEvent e){
 		if(usernameTF.getText().equals("admin")){
 			
 		}
 		else{
-			
-			try {
+			username = usernameTF.getText();
+            try {
 				
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("/view/album.fxml"));
@@ -41,9 +43,9 @@ public class LoginController implements Initializable{
 	            stage.setResizable(false);  
 	            stage.setTitle(usernameTF.getText()+"'s Album");
 	            
-	            //currentStage.close();
 	            stage.show();
-				
+	            //currentStage.close();
+	            
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
