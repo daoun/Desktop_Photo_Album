@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Photo;
@@ -14,8 +15,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -54,12 +57,7 @@ public class ThumbnailController implements Initializable{
 			path = file.getPath();
 		}
 		
-		String caption = "add caption";
-		/*
-		String name = createAlbum();
-		if(name == null){
-			return;
-		}*/
+		String caption = getCaption();
 		
 		Photo photo = new Photo(caption);
 		
@@ -126,10 +124,10 @@ public class ThumbnailController implements Initializable{
     	
     	
 	}
-	/*
-	public String createAlbum(){
-		Dialog<String> dialog = new TextInputDialog("Enter a user name.");
-		dialog.setHeaderText("Add Photo");
+	
+	public String getCaption(){
+		Dialog<String> dialog = new TextInputDialog("Enter a caption. ");
+		dialog.setHeaderText("Add Caption");
 		dialog.setTitle("Photo Album");
 		Optional<String> result = dialog.showAndWait();
 		if(result.isPresent()){
@@ -139,7 +137,7 @@ public class ThumbnailController implements Initializable{
 		else{
 			return null;
 		}
-	}*/
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
