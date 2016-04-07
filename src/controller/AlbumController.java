@@ -31,9 +31,9 @@ import javafx.stage.Stage;
 
 public class AlbumController implements Initializable{
 
-	
+	public static Stage thumbnailStage;
 	@FXML private Button albumAddBtn;
-	@FXML private Text albumTitle;
+	@FXML private Text userTitle;
 	@FXML private GridPane albumListGP;
 	@FXML private ScrollPane albumListSP;
 	
@@ -96,6 +96,8 @@ public class AlbumController implements Initializable{
             stage.setScene(scene);  
             stage.setResizable(false);  
             stage.setTitle(name);
+            
+            thumbnailStage = stage;
             
             stage.show();
             //currentStage.close();
