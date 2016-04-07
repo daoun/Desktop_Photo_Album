@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Photo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -39,8 +41,7 @@ public class ThumbnailController implements Initializable{
 	@FXML private ComboBox<?> photoOption;
 	
 	public int numPhoto = 0;
-	
-	
+	public static int currentAlbum;
 	
 	public void addPhoto(ActionEvent event){
 		
@@ -52,11 +53,15 @@ public class ThumbnailController implements Initializable{
 		String path = file.getPath();
 		System.out.println(path);
 		
+		String caption = "add caption";
 		/*
 		String name = createAlbum();
 		if(name == null){
 			return;
 		}*/
+		
+		Photo photo = new Photo(caption);
+		
 		
 		int row = numPhoto/5;
         int col = numPhoto%5;
@@ -67,17 +72,22 @@ public class ThumbnailController implements Initializable{
             rc.setVgrow(Priority.ALWAYS);
             photoListGP.getRowConstraints().add(rc);
         }
-        BorderPane photo = new BorderPane();
+        BorderPane photoBP = new BorderPane();
         
         ImageView image = new ImageView("file:\\" + path);
         image.setFitHeight(100);
         image.setFitWidth(100);
         
-        photo.setCenter(image);
+        Text captionT = new Text(caption);
+        AnchorPane.setBottomAnchor(captionT, 10.0);
         
-        photoListGP.add(photo, col, row);
+        photoBP.setCenter(image);
+        photoBP.setBottom(captionT);
+        BorderPane.setAlignment(captionT, Pos.CENTER);
         
-        photo.setOnMouseClicked(e ->{
+        photoListGP.add(photoBP, col, row);
+        
+        photoBP.setOnMouseClicked(e ->{
         	
         	openPhoto(path, row, col);
 

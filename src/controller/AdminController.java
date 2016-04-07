@@ -52,14 +52,15 @@ public class AdminController implements Initializable {
 		if(entered.length() != 0){
 			newUser = new User(entered);
 			userlist.add(newUser);
-			
-			
-		}
-				
+		}			
 	}
 	
 	public void deleteUser(ActionEvent e){
-		
+		int selected = userLV.getSelectionModel().getSelectedIndex();
+		if(selected < 0){
+			return;
+		}
+		userlist.remove(selected);
 	}
 
 }

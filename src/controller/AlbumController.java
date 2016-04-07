@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import application.Album;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,8 @@ public class AlbumController implements Initializable{
 	@FXML private ComboBox<?> albumOption;
 	
 	public int numAlbum = 0;
+	public static int currentUser;
+	public static String selectedAlbumName;
 	
 	public void addAlbum(ActionEvent event){
 		
@@ -47,6 +50,12 @@ public class AlbumController implements Initializable{
 		if(name == null){
 			return;
 		}
+		
+		// check if the album name is unique,
+		// if not alert that it is not unique
+		
+		Album album = new Album(name);
+		AdminController.userlist.get(currentUser).addAlbum(album);
 		
 		int row = numAlbum/3;
         int col = numAlbum%3;
@@ -57,7 +66,7 @@ public class AlbumController implements Initializable{
             rc.setVgrow(Priority.ALWAYS);
             albumListGP.getRowConstraints().add(rc);
         }
-        BorderPane album = new BorderPane();
+        BorderPane albumBP = new BorderPane();
         
         ImageView image = new ImageView("/view/no_photo.png");
         image.setFitHeight(100);
@@ -66,13 +75,13 @@ public class AlbumController implements Initializable{
         Text albumtitle = new Text(name);
         AnchorPane.setBottomAnchor(albumtitle, 10.0);
         
-        album.setCenter(image);
-        album.setBottom(albumtitle);
+        albumBP.setCenter(image);
+        albumBP.setBottom(albumtitle);
         BorderPane.setAlignment(albumtitle, Pos.CENTER);
         
-        albumListGP.add(album, col, row);
+        albumListGP.add(albumBP, col, row);
         
-        album.setOnMouseClicked(e ->{
+        albumBP.setOnMouseClicked(e ->{
         	
         	openAlbum(name, row, col);
 
@@ -86,6 +95,10 @@ public class AlbumController implements Initializable{
 			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/thumbnail.fxml"));
+			
+			int index = row*3 + col;
+			//albumListGP
+			
 			
 			AnchorPane root = (AnchorPane)loader.load();
 			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
