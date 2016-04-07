@@ -48,7 +48,8 @@
       		</GridPane>
          </content>
       </ScrollPane>
-      <Button fx:id="photoAddBtn" layoutX="26.0" layoutY="20.0" 
+      <Button fx:id="photoAddBtn" onAction="#addPhoto"
+      		layoutX="26.0" layoutY="20.0" 
       		mnemonicParsing="false" 
       		style="-fx-background-color: black;" 
       		text="+" textFill="WHITE">
@@ -56,7 +57,7 @@
             <Font name="Avenir Next Heavy" size="24.0" />
          </font>
       </Button>
-      <ComboBox id="albumOption" layoutX="581.0" layoutY="31.0" 
+      <ComboBox id="photoOption" layoutX="581.0" layoutY="31.0" 
       		prefHeight="28.0" prefWidth="94.0" 
       		promptText="options" 
       		style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
@@ -68,7 +69,7 @@
 		</items>
       </ComboBox>
       <TextField layoutX="386.0" layoutY="31.0" 
-      		prefHeight="28.0" prefWidth="180.0" p
-      		romptText="search photo" />
+      		prefHeight="28.0" prefWidth="180.0" 
+      		promptText="search photo" />
    </children>
 </AnchorPane>

@@ -128,7 +128,7 @@ public class AlbumController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		albumTitle.setText(LoginController.username + "'s Album");
+		userTitle.setText(LoginController.username + "'s Album");
 		albumListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
 		
 		
