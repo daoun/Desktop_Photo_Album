@@ -1,12 +1,13 @@
 package application;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Photo {
 
-	private List<String> taglist;
+	private List<String> taglist = new ArrayList<String>();;
 	private URL url;
 	private String caption;
 	private Date date;

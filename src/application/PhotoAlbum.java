@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.AdminController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ public class PhotoAlbum extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Photo Album Log in");
 		primaryStage.setResizable(false);  
+		AdminController.defaultAdmin();
 		primaryStage.show();
 		
 	}
