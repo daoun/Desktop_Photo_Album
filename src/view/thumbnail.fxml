@@ -1,8 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections ?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane maxHeight="450.0" maxWidth="700.0" 
+		minHeight="450.0" minWidth="700.0" 
+		style="-fx-background-color: #000000;" 
+		xmlns="http://javafx.com/javafx/8" 
+		xmlns:fx="http://javafx.com/fxml/1" 
+		fx:controller="controller.ThumbnailController">
+   <children>
+      <Text fx:id="albumTitle" 
+      		fill="WHITE" layoutX="68.0" layoutY="55.0" 
+      		strokeType="OUTSIDE" strokeWidth="0.0" 
+      		text="Title" textAlignment="CENTER" 
+      		wrappingWidth="445.5343725681305">
+         <font>
+            <Font name="Avenir Roman" size="30.0" />
+         </font>
+      </Text>
+     
+      <ScrollPane fx:id="photoListSP" style="-fx-background-color: white;" 
+      		AnchorPane.bottomAnchor="20.0" 
+      		AnchorPane.leftAnchor="20.0" 
+      		AnchorPane.rightAnchor="20.0" 
+      		AnchorPane.topAnchor="80.0">
+         <content>
+            <GridPane fx:id="photoListGP" minHeight="346.0" minWidth="657.0">
+      
+      			<columnConstraints>
+        			<ColumnConstraints hgrow="NEVER" prefWidth="131" />
+           			<ColumnConstraints hgrow="NEVER" prefWidth="131" />
+            		<ColumnConstraints hgrow="NEVER" prefWidth="131" />
+                  	<ColumnConstraints hgrow="NEVER" prefWidth="131" />
+                  	<ColumnConstraints hgrow="NEVER" prefWidth="131" />
+ 				</columnConstraints>
+        		<rowConstraints>
+        	    	<RowConstraints prefHeight="116" vgrow="ALWAYS" />
+        	    	<RowConstraints prefHeight="116" vgrow="ALWAYS" />
+                  	<RowConstraints prefHeight="116" vgrow="ALWAYS" />
+        		</rowConstraints>
+      		</GridPane>
+         </content>
+      </ScrollPane>
+      <Button fx:id="photoAddBtn" layoutX="26.0" layoutY="20.0" 
+      		mnemonicParsing="false" 
+      		style="-fx-background-color: black;" 
+      		text="+" textFill="WHITE">
+         <font>
+            <Font name="Avenir Next Heavy" size="24.0" />
+         </font>
+      </Button>
+      <ComboBox id="albumOption" layoutX="581.0" layoutY="31.0" 
+      		prefHeight="28.0" prefWidth="94.0" 
+      		promptText="options" 
+      		style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
+      	<items>
+			<FXCollections fx:factory="observableArrayList">
+				<String fx:value="rename" />
+				<String fx:value="delete" />
+			</FXCollections>
+		</items>
+      </ComboBox>
+      <TextField layoutX="386.0" layoutY="31.0" 
+      		prefHeight="28.0" prefWidth="180.0" p
+      		romptText="search photo" />
+   </children>
 </AnchorPane>
-
