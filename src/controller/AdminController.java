@@ -62,5 +62,13 @@ public class AdminController implements Initializable {
 		}
 		userlist.remove(selected);
 	}
+	
+	
+	public static void defaultAdmin(){
+		User cap = new User("cap");
+		User daoun = new User("daoun");
+		userlist.add(cap);
+		userlist.add(daoun);
+	}
 
 }
