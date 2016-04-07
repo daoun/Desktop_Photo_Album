@@ -1,25 +1,33 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class AlbumController implements Initializable{
 
@@ -42,6 +50,13 @@ public class AlbumController implements Initializable{
 		
 		int row = numAlbum/3;
         int col = numAlbum%3;
+        
+        if(row >1 && col == 0){
+        	RowConstraints rc = new RowConstraints();
+            rc.setPrefHeight(173);
+            rc.setVgrow(Priority.ALWAYS);
+            albumListGP.getRowConstraints().add(rc);
+        }
         BorderPane album = new BorderPane();
         
         ImageView image = new ImageView("/view/no_photo.png");
@@ -56,8 +71,42 @@ public class AlbumController implements Initializable{
         BorderPane.setAlignment(albumtitle, Pos.CENTER);
         
         albumListGP.add(album, col, row);
+        
+        album.setOnMouseClicked(e ->{
+        	
+        	openAlbum(name, row, col);
+
+        });
 		
 		numAlbum++;
+	}
+	
+	public void openAlbum(String name, int row, int col){
+		try {
+			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/view/thumbnail.fxml"));
+			
+			AnchorPane root = (AnchorPane)loader.load();
+			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
+        	
+			Stage stage = new Stage();
+            Scene scene = new Scene(root);
+			
+            stage.setScene(scene);  
+            stage.setResizable(false);  
+            stage.setTitle(name);
+            
+            stage.show();
+            //currentStage.close();
+            
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	
 	}
 	
 	public String createAlbum(){
@@ -78,6 +127,8 @@ public class AlbumController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		albumTitle.setText(LoginController.username + "'s Album");
+		albumListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
+		
 		
 	}
 	
