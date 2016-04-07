@@ -48,10 +48,10 @@ public class ThumbnailController implements Initializable{
 		
 		
 		final FileChooser fc = new FileChooser();
-		
+		String path = "";
 		File file = fc.showOpenDialog(AlbumController.thumbnailStage);
 		if(file != null){
-			String path = file.getPath();
+			path = file.getPath();
 		}
 		
 		String caption = "add caption";
@@ -90,7 +90,7 @@ public class ThumbnailController implements Initializable{
         
         photoBP.setOnMouseClicked(e ->{
         	
-        	openPhoto(path, row, col);
+        	openPhoto(caption, row, col);
 
         });
 		
