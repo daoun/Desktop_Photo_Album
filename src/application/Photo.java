@@ -1,28 +1,50 @@
 package application;
 
+import java.net.URL;
+import java.util.Date;
+import java.util.List;
+
 public class Photo {
 
-	private String name;
-	private String tag;
+	private List<String> taglist;
+	private URL url;
+	private String caption;
+	private Date date;
 	
-	public Photo(String name){
-		this.name = name;
+	public Photo(String caption){
+		this.caption = caption;
 	}
 
-	public String getName() {
-		return name;
+	public String getCaption() {
+		return caption;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setCaption(String caption) {
+		this.caption = caption;
 	}
 	
+	public String getTag(int index) {
+		return taglist.get(index);
+	}
+	public void addTag(String tag) {
+		this.taglist.add(tag);
+	}
+	
+	public URL getURL() {
+		return url;
+	}
+	public void setURL(URL url) {
+		this.url = url;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+	@SuppressWarnings("deprecation")
+	public void setDate(int year, int month, int day) {
+		this.date = new Date(year, month, day);
+	}
+	
+	public String toString(){
+		return caption;
+	}
 }
