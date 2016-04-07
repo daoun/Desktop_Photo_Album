@@ -1,23 +1,18 @@
 package controller;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -46,19 +41,6 @@ public class ThumbnailController implements Initializable{
 	public int numPhoto = 0;
 	
 	
-	private Desktop desktop = Desktop.getDesktop();
-	
-	
-	
-	private void openFile(File file){
-		try{
-			desktop.open(file);
-		}catch(IOException ex){
-			ex.printStackTrace();
-		}
-	}
-	
-	
 	
 	public void addPhoto(ActionEvent event){
 		
@@ -67,16 +49,14 @@ public class ThumbnailController implements Initializable{
 		final FileChooser fc = new FileChooser();
 		
 		File file = fc.showOpenDialog(AlbumController.thumbnailStage);
+		String path = file.getPath();
+		System.out.println(path);
 		
-		if(file != null){
-			openFile(file);
-		}
-		
-		
+		/*
 		String name = createAlbum();
 		if(name == null){
 			return;
-		}
+		}*/
 		
 		int row = numPhoto/5;
         int col = numPhoto%5;
@@ -87,31 +67,26 @@ public class ThumbnailController implements Initializable{
             rc.setVgrow(Priority.ALWAYS);
             photoListGP.getRowConstraints().add(rc);
         }
-        BorderPane album = new BorderPane();
+        BorderPane photo = new BorderPane();
         
-        ImageView image = new ImageView("/view/no_photo.png");
+        ImageView image = new ImageView("file:\\" + path);
         image.setFitHeight(100);
         image.setFitWidth(100);
         
-        Text albumtitle = new Text(name);
-        AnchorPane.setBottomAnchor(albumtitle, 10.0);
+        photo.setCenter(image);
         
-        album.setCenter(image);
-        album.setBottom(albumtitle);
-        BorderPane.setAlignment(albumtitle, Pos.CENTER);
+        photoListGP.add(photo, col, row);
         
-        photoListGP.add(album, col, row);
-        
-        album.setOnMouseClicked(e ->{
+        photo.setOnMouseClicked(e ->{
         	
-        	openAlbum(name, row, col);
+        	openPhoto(path, row, col);
 
         });
 		
 		numPhoto++;
 	}
 	
-	public void openAlbum(String name, int row, int col){
+	public void openPhoto(String name, int row, int col){
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
@@ -140,7 +115,7 @@ public class ThumbnailController implements Initializable{
     	
     	
 	}
-	
+	/*
 	public String createAlbum(){
 		Dialog<String> dialog = new TextInputDialog("Enter a user name.");
 		dialog.setHeaderText("Add Photo");
@@ -153,7 +128,7 @@ public class ThumbnailController implements Initializable{
 		else{
 			return null;
 		}
-	}
+	}*/
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
