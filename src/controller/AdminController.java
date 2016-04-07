@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class AdminController implements Initializable {
 	
-	public static final ObservableList<User> userlist = FXCollections.observableArrayList(); 
+	public static ObservableList<User> userlist = FXCollections.observableArrayList(); 
 	
 	@FXML private AnchorPane adminStage;
 	@FXML private Button addUser;

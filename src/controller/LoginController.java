@@ -56,10 +56,12 @@ public class LoginController implements Initializable{
 			int i=0;
 			for(i = 0; i < AdminController.userlist.size(); i++){
 				if(AdminController.userlist.get(i).getName().equals(username)){
+					
 					AlbumController.currentUser = i;
 					break;
 				}
 			}
+			System.out.println(AlbumController.currentUser);
 			if(i == AdminController.userlist.size()){
 				userDoesNotExist();
 				return;

@@ -1,11 +1,12 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
 
 	private String name;
-	private List<Album> albumlist;
+	private List<Album> albumlist = new ArrayList<Album>();
 	
 	public User(String name){
 		this.name = name;

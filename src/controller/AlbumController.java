@@ -55,6 +55,7 @@ public class AlbumController implements Initializable{
 		// if not alert that it is not unique
 		
 		Album album = new Album(name);
+		System.out.println(AdminController.userlist.size());
 		AdminController.userlist.get(currentUser).addAlbum(album);
 		
 		int row = numAlbum/3;
