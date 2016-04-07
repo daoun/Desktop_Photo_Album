@@ -50,8 +50,9 @@ public class ThumbnailController implements Initializable{
 		final FileChooser fc = new FileChooser();
 		
 		File file = fc.showOpenDialog(AlbumController.thumbnailStage);
-		String path = file.getPath();
-		System.out.println(path);
+		if(file != null){
+			String path = file.getPath();
+		}
 		
 		String caption = "add caption";
 		/*
@@ -74,7 +75,7 @@ public class ThumbnailController implements Initializable{
         }
         BorderPane photoBP = new BorderPane();
         
-        ImageView image = new ImageView("file:\\" + path);
+        ImageView image = new ImageView("file:" + path);
         image.setFitHeight(100);
         image.setFitWidth(100);
         
