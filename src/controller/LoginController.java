@@ -79,7 +79,7 @@ public class LoginController implements Initializable{
 				
 	            stage.setScene(scene);  
 	            stage.setResizable(false);  
-	            stage.setTitle(usernameTF.getText()+"'s Album");
+	            stage.setTitle(usernameTF.getText());
 	            
 	            stage.show();
 	            //currentStage.close();

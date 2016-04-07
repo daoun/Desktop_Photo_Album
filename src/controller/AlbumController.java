@@ -98,7 +98,7 @@ public class AlbumController implements Initializable{
 			loader.setLocation(getClass().getResource("/view/thumbnail.fxml"));
 			
 			int index = row*3 + col;
-			//albumListGP
+			System.out.println(albumListGP.getChildren().get(index).getScene());
 			
 			
 			AnchorPane root = (AnchorPane)loader.load();
@@ -142,7 +142,7 @@ public class AlbumController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		userTitle.setText(LoginController.username + "'s Album");
+		userTitle.setText(LoginController.username);
 		albumListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
 		
 		
