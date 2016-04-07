@@ -52,6 +52,8 @@ public class AdminController implements Initializable {
 		if(entered.length() != 0){
 			newUser = new User(entered);
 			userlist.add(newUser);
+			
+			
 		}
 				
 	}

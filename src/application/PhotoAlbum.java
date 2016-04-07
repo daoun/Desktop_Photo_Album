@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 
 public class PhotoAlbum extends Application {
 	
-	public static ArrayList<User> userAL = new ArrayList<User>();
+	public static List<User> userAL = new ArrayList<User>();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
