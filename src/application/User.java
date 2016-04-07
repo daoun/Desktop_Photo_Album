@@ -18,8 +18,8 @@ public class User {
 		this.name = name;
 	}
 	
-	public void addAlbum(Album pic){
-		this.albumlist.add(pic);
+	public void addAlbum(Album album){
+		this.albumlist.add(album);
 	}
 	public Album getAlbum(int index){
 		return albumlist.get(index);
