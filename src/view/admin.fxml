@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -7,22 +8,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" id="adminStage" fx:controller="controller.AdminController">
+<AnchorPane id="adminStage" maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminController">
    
    <children>
-      <Text fill="WHITE" layoutX="-65.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" textAlignment="CENTER" wrappingWidth="445.5343725681305">
+      <Text fill="WHITE" layoutX="15.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" textAlignment="CENTER" wrappingWidth="445.5343725681305">
          <font>
             <Font name="Avenir Roman" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="addUser" onAction="#addUser" layoutX="20.0" mnemonicParsing="false" style="-fx-background-color: black;" text="+" textFill="WHITE">
+      <Button fx:id="addUser" layoutX="83.0" layoutY="-7.0" mnemonicParsing="false" onAction="#addUser" prefHeight="31.0" prefWidth="10.0" style="-fx-background-color: black;" text="+" textFill="WHITE">
          <font>
-            <Font size="32.0" />
+            <Font name="System Bold" size="41.0" />
          </font>
       </Button>
-      <Button fx:id="deleteUser" onAction="#deleteUser" layoutX="618.0" layoutY="5.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="62.0" style="-fx-background-color: black;" text="x" textFill="WHITE">
+      <Button fx:id="deleteUser" layoutX="618.0" layoutY="5.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="51.0" prefWidth="62.0" style="-fx-background-color: black;" text="x" textFill="WHITE">
          <font>
-            <Font name="Calibri" size="32.0" />
+            <Font name="Calibri Bold" size="40.0" />
          </font>
          <effect>
             <Blend />
@@ -31,5 +32,10 @@
       <ListView fx:id="userLV" layoutY="81.0" prefHeight="359.0" prefWidth="680.0" style="-fx-padding: 50; -fx-background-color: white;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0"> 
       
       </ListView>
+      <Button id="backBtn" fx:id="addUser1" layoutY="-7.0" mnemonicParsing="false" onAction="#addUser" prefHeight="63.0" prefWidth="0.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE" AnchorPane.topAnchor="-7.0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
