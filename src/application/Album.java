@@ -1,11 +1,12 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Album {
 
 	private String name;
-	private List<Photo> photolist;
+	private List<Photo> photolist = new ArrayList<Photo>();
 	
 	public Album(String name){
 		this.name = name;
@@ -23,6 +24,9 @@ public class Album {
 	}
 	public Photo getPhoto(int index){
 		return photolist.get(index);
+	}
+	public int getPhotolistSize(){
+		return photolist.size();
 	}
 	
 	public String toString(){

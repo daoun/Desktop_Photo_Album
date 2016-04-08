@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
@@ -22,9 +21,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
@@ -42,7 +39,6 @@ public class AlbumController implements Initializable{
 	
 	public int numAlbum = 0;
 	public static int currentUser;
-	public static String selectedAlbumName;
 	
 	public void addAlbum(ActionEvent event){
 		
@@ -99,7 +95,7 @@ public class AlbumController implements Initializable{
 			
 			int index = row*3 + col;
 			System.out.println(albumListGP.getChildren().get(index).getScene());
-			
+			ThumbnailController.currentAlbum = index;
 			
 			AnchorPane root = (AnchorPane)loader.load();
 			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
@@ -138,13 +134,58 @@ public class AlbumController implements Initializable{
 			return null;
 		}
 	}
+	
+	public void loadAlbums(){
+        int i = 0;
+        for(i = 0; i < AdminController.userlist.get(currentUser).getAlbumlistSize(); i++){
+        	int row = i/3;
+        	int col = i%3;
+        	
+        	if(row >1 && col == 0){
+            	RowConstraints rc = new RowConstraints();
+                rc.setPrefHeight(173);
+                rc.setVgrow(Priority.ALWAYS);
+                albumListGP.getRowConstraints().add(rc);
+            }
+            BorderPane albumBP = new BorderPane();
+            ImageView image;
+            if(AdminController.userlist.get(currentUser).getAlbum(i).getPhotolistSize() < 1){
+            	image = new ImageView("/view/no_photo.png");
+            }
+            else{
+            	image = new ImageView(AdminController.userlist.get(currentUser).getAlbum(i).getPhoto(0).getURL());
+            }
+        	
+            image.setFitHeight(100);
+            image.setFitWidth(100);
+            
+            String name = AdminController.userlist.get(currentUser).getAlbum(i).getName();
+            Text albumtitle = new Text(name);
+            AnchorPane.setBottomAnchor(albumtitle, 10.0);
+            
+            albumBP.setCenter(image);
+            albumBP.setBottom(albumtitle);
+            BorderPane.setAlignment(albumtitle, Pos.CENTER);
+            
+            albumListGP.add(albumBP, col, row);
+            
+            albumBP.setOnMouseClicked(e ->{
+            	
+            	openAlbum(name, row, col);
 
+            });
+        }
+        
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		userTitle.setText(LoginController.username);
 		albumListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
-		
+		if(AdminController.userlist.get(currentUser).getAlbumlistSize() < 1){
+			loadAlbums();
+		}
 		
 	}
 	

@@ -8,7 +8,7 @@ import java.util.List;
 public class Photo {
 
 	private List<String> taglist = new ArrayList<String>();;
-	private URL url;
+	private String url;
 	private String caption;
 	private Date date;
 	
@@ -30,10 +30,10 @@ public class Photo {
 		this.taglist.add(tag);
 	}
 	
-	public URL getURL() {
+	public String getURL() {
 		return url;
 	}
-	public void setURL(URL url) {
+	public void setURL(String url) {
 		this.url = url;
 	}
 	

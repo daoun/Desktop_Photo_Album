@@ -74,6 +74,7 @@ public class ThumbnailController implements Initializable{
         BorderPane photoBP = new BorderPane();
         
         ImageView image = new ImageView("file:" + path);
+        photo.setURL("file:" + path);
         image.setFitHeight(100);
         image.setFitWidth(100);
         
@@ -85,6 +86,7 @@ public class ThumbnailController implements Initializable{
         BorderPane.setAlignment(captionT, Pos.CENTER);
         
         photoListGP.add(photoBP, col, row);
+        AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).addPhoto(photo);
         
         photoBP.setOnMouseClicked(e ->{
         	
@@ -138,13 +140,54 @@ public class ThumbnailController implements Initializable{
 			return null;
 		}
 	}
+	
+	public void loadPhotos(){
+        int i = 0;
+        for(i = 0; i < AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize(); i++){
+        	int row = i/5;
+        	int col = i%5;
+        	
+        	if(row >1 && col == 0){
+            	RowConstraints rc = new RowConstraints();
+                rc.setPrefHeight(116);
+                rc.setVgrow(Priority.ALWAYS);
+                photoListGP.getRowConstraints().add(rc);
+            }
+            BorderPane photoBP = new BorderPane();
+            
+            ImageView image = new ImageView(AdminController.userlist.
+            		get(AlbumController.currentUser).
+            		getAlbum(currentAlbum).getPhoto(i).getURL());
+            image.setFitHeight(100);
+            image.setFitWidth(100);
+            
+            String caption = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhoto(i).getCaption();
+            Text captionT = new Text(caption);
+            AnchorPane.setBottomAnchor(captionT, 10.0);
+            
+            photoBP.setCenter(image);
+            photoBP.setBottom(captionT);
+            BorderPane.setAlignment(captionT, Pos.CENTER);
+            
+            photoListGP.add(photoBP, col, row);
+            
+            photoBP.setOnMouseClicked(e ->{
+            	
+            	openPhoto(caption, row, col);
+
+            });
+        }
+        
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		albumTitle.setText(LoginController.username + "'s Album");
+		albumTitle.setText(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getName());
 		photoListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
-		
+		if(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize() < 1){
+			loadPhotos();
+		}
 		
 	}
 	

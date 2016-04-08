@@ -25,6 +25,9 @@ public class User {
 	public Album getAlbum(int index){
 		return albumlist.get(index);
 	}
+	public int getAlbumlistSize(){
+		return albumlist.size();
+	}
 	
 	public String toString(){
 		return name;
