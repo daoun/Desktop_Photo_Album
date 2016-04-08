@@ -183,7 +183,8 @@ public class AlbumController implements Initializable{
 		// TODO Auto-generated method stub
 		userTitle.setText(LoginController.username);
 		albumListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
-		if(AdminController.userlist.get(currentUser).getAlbumlistSize() < 1){
+		System.out.println("Username: "+AdminController.userlist.get(AlbumController.currentUser).getName());
+		if(AdminController.userlist.get(currentUser).getAlbumlistSize() > 0){
 			loadAlbums();
 		}
 		

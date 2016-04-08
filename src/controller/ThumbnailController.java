@@ -185,7 +185,8 @@ public class ThumbnailController implements Initializable{
 		// TODO Auto-generated method stub
 		albumTitle.setText(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getName());
 		photoListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
-		if(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize() < 1){
+		System.out.println("Album Name: "+AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getName());
+		if(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize() > 0){
 			loadPhotos();
 		}
 		
