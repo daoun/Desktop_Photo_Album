@@ -16,14 +16,14 @@
             <Font name="Avenir Roman" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="addUser" layoutX="83.0" layoutY="-7.0" mnemonicParsing="false" onAction="#addUser" prefHeight="31.0" prefWidth="10.0" style="-fx-background-color: black;" text="+" textFill="WHITE">
+      <Button fx:id="addUser" layoutX="73.0" layoutY="10.0" mnemonicParsing="false" onAction="#addUser" prefHeight="64.0" prefWidth="73.0" style="-fx-background-color: black;" text="+" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="41.0" />
+            <Font size="30.0" />
          </font>
       </Button>
-      <Button fx:id="deleteUser" layoutX="618.0" layoutY="5.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="51.0" prefWidth="62.0" style="-fx-background-color: black;" text="x" textFill="WHITE">
+      <Button fx:id="deleteUser" layoutX="623.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="51.0" prefWidth="62.0" style="-fx-background-color: black;" text="x" textFill="WHITE">
          <font>
-            <Font name="Calibri Bold" size="40.0" />
+            <Font name="Calibri" size="30.0" />
          </font>
          <effect>
             <Blend />
@@ -32,9 +32,9 @@
       <ListView fx:id="userLV" layoutY="81.0" prefHeight="359.0" prefWidth="680.0" style="-fx-padding: 50; -fx-background-color: white;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0"> 
       
       </ListView>
-      <Button id="backBtn" fx:id="addUser1" layoutY="-7.0" mnemonicParsing="false" onAction="#addUser" prefHeight="63.0" prefWidth="0.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE" AnchorPane.topAnchor="-7.0">
+      <Button id="backBtn" fx:id="addUser1" layoutY="5.0" mnemonicParsing="false" onAction="#back" prefHeight="74.0" prefWidth="73.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE" AnchorPane.topAnchor="5.0">
          <font>
-            <Font name="System Bold" size="40.0" />
+            <Font size="30.0" />
          </font>
       </Button>
    </children>

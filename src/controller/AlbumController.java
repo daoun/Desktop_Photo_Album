@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Album;
+import application.PhotoAlbum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -108,10 +109,8 @@ public class AlbumController implements Initializable{
             stage.setTitle(name);
             
             thumbnailStage = stage;
-            
+            LoginController.albumStage.close();
             stage.show();
-            //currentStage.close();
-            
 			
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -176,6 +175,11 @@ public class AlbumController implements Initializable{
             });
         }
         
+	}
+	
+	public void back(ActionEvent e){
+		LoginController.albumStage.close();
+		PhotoAlbum.loginStage.show();
 	}
 	
 	@Override

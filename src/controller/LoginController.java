@@ -18,10 +18,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable{
-	
+
 	@FXML private Button loginBtn;
 	@FXML private TextField usernameTF;
 	@FXML private AnchorPane loginStage;
+
+	public static Stage adminStage;
+	public static Stage albumStage;
 	
 	public static String username = "";
 	
@@ -33,7 +36,6 @@ public class LoginController implements Initializable{
 				loader.setLocation(getClass().getResource("/view/admin.fxml"));
 				
 				AnchorPane root = (AnchorPane)loader.load();
-				//Stage currentStage = (Stage) loginStage.getScene().getWindow();
 	        	
 				Stage stage = new Stage();
 	            Scene scene = new Scene(root);
@@ -42,8 +44,9 @@ public class LoginController implements Initializable{
 	            stage.setResizable(false);  
 	            stage.setTitle("Admin Page");
 	            
+	            adminStage = stage;
 	            stage.show();
-	            //currentStage.close();
+	            PhotoAlbum.loginStage.close();
 	            
 				
 			} catch (IOException e1) {
@@ -81,8 +84,9 @@ public class LoginController implements Initializable{
 	            stage.setResizable(false);  
 	            stage.setTitle(usernameTF.getText());
 	            
+	            albumStage = stage;
 	            stage.show();
-	            //currentStage.close();
+	            PhotoAlbum.loginStage.close();
 	            
 				
 			} catch (IOException e1) {

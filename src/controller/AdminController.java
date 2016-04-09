@@ -1,11 +1,10 @@
 package controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import application.User;
+import application.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,6 +52,13 @@ public class AdminController implements Initializable {
 			newUser = new User(entered);
 			userlist.add(newUser);
 		}			
+	}
+	
+	public void back(ActionEvent e){
+		
+		LoginController.adminStage.close();
+		PhotoAlbum.loginStage.show();
+		
 	}
 	
 	public void deleteUser(ActionEvent e){

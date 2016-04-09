@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class PhotoAlbum extends Application {
 	
 	public static List<User> userAL = new ArrayList<User>();
+	public static Stage loginStage;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -27,6 +28,7 @@ public class PhotoAlbum extends Application {
 		primaryStage.setTitle("Photo Album Log in");
 		primaryStage.setResizable(false);  
 		AdminController.defaultAdmin();
+		loginStage = primaryStage;
 		primaryStage.show();
 		
 	}

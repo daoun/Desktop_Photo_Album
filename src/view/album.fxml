@@ -8,29 +8,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections ?>
 
-<AnchorPane maxHeight="450.0" maxWidth="700.0" 
-		minHeight="450.0" minWidth="700.0" 
-		style="-fx-background-color: #000000;" 
-		fx:controller="controller.AlbumController"
-		xmlns="http://javafx.com/javafx/8" 
-		xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlbumController">
    <children>
-      <Text fx:id="userTitle"
-      		fill="WHITE" layoutX="68.0" layoutY="55.0" 
-      		strokeType="OUTSIDE" strokeWidth="0.0"
-      		text="Title" textAlignment="CENTER" 
-      		wrappingWidth="445.5343725681305">
+      <Text fx:id="userTitle" fill="WHITE" layoutX="68.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" wrappingWidth="445.5343725681305">
          <font>
             <Font name="Avenir Roman" size="30.0" />
          </font>
       </Text>
      
-      <ScrollPane fx:id="albumListSP"
-      		style="-fx-background-color: white;" 
-      		AnchorPane.bottomAnchor="20.0" 
-      		AnchorPane.leftAnchor="20.0" 
-      		AnchorPane.rightAnchor="20.0" 
-      		AnchorPane.topAnchor="80.0">
+      <ScrollPane fx:id="albumListSP" style="-fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
          <content>
             <GridPane fx:id="albumListGP" minHeight="346.0" minWidth="657.0">
       
@@ -46,13 +32,9 @@
       		</GridPane>
          </content>
       </ScrollPane>
-      <Button fx:id="albumAddBtn" onAction="#addAlbum"
-      		layoutX="26.0" layoutY="20.0" 
-      		mnemonicParsing="false" 
-      		style="-fx-background-color: black;" 
-      		text="+" textFill="WHITE">
+      <Button fx:id="albumAddBtn" layoutX="91.0" layoutY="10.0" mnemonicParsing="false" onAction="#addAlbum" style="-fx-background-color: black;" text="+" textFill="WHITE">
          <font>
-            <Font name="Avenir Next Heavy" size="24.0" />
+            <Font size="30.0" />
          </font>
       </Button>
       <ComboBox id="albumOption" layoutX="525.0" layoutY="31.0" prefWidth="150.0" promptText="options" style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
@@ -63,5 +45,10 @@
 			</FXCollections>
 		</items>
       </ComboBox>
+      <Button id="backBtn" fx:id="addUser1" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#back" prefHeight="67.0" prefWidth="77.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

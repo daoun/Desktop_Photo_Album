@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Photo;
+import application.PhotoAlbum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -178,6 +179,11 @@ public class ThumbnailController implements Initializable{
             });
         }
         
+	}
+	
+	public void back(ActionEvent e){
+		AlbumController.thumbnailStage.close();
+		LoginController.albumStage.show();
 	}
 
 	@Override

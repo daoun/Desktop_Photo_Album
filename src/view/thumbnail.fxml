@@ -8,28 +8,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections ?>
 
-<AnchorPane maxHeight="450.0" maxWidth="700.0" 
-		minHeight="450.0" minWidth="700.0" 
-		style="-fx-background-color: #000000;" 
-		xmlns="http://javafx.com/javafx/8" 
-		xmlns:fx="http://javafx.com/fxml/1" 
-		fx:controller="controller.ThumbnailController">
+<AnchorPane maxHeight="450.0" maxWidth="700.0" minHeight="450.0" minWidth="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ThumbnailController">
    <children>
-      <Text fx:id="albumTitle" 
-      		fill="WHITE" layoutX="68.0" layoutY="55.0" 
-      		strokeType="OUTSIDE" strokeWidth="0.0" 
-      		text="Title" textAlignment="CENTER" 
-      		wrappingWidth="445.5343725681305">
+      <Text fx:id="albumTitle" fill="WHITE" layoutX="68.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" wrappingWidth="445.5343725681305">
          <font>
             <Font name="Avenir Roman" size="30.0" />
          </font>
       </Text>
      
-      <ScrollPane fx:id="photoListSP" style="-fx-background-color: white;" 
-      		AnchorPane.bottomAnchor="20.0" 
-      		AnchorPane.leftAnchor="20.0" 
-      		AnchorPane.rightAnchor="20.0" 
-      		AnchorPane.topAnchor="80.0">
+      <ScrollPane fx:id="photoListSP" style="-fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
          <content>
             <GridPane fx:id="photoListGP" minHeight="346.0" minWidth="657.0">
       
@@ -48,19 +35,12 @@
       		</GridPane>
          </content>
       </ScrollPane>
-      <Button fx:id="photoAddBtn" onAction="#addPhoto"
-      		layoutX="26.0" layoutY="20.0" 
-      		mnemonicParsing="false" 
-      		style="-fx-background-color: black;" 
-      		text="+" textFill="WHITE">
+      <Button fx:id="photoAddBtn" layoutX="77.0" layoutY="10.0" mnemonicParsing="false" onAction="#addPhoto" style="-fx-background-color: black;" text="+" textFill="WHITE">
          <font>
-            <Font name="Avenir Next Heavy" size="24.0" />
+            <Font size="30.0" />
          </font>
       </Button>
-      <ComboBox id="photoOption" layoutX="581.0" layoutY="31.0" 
-      		prefHeight="28.0" prefWidth="94.0" 
-      		promptText="options" 
-      		style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
+      <ComboBox id="photoOption" layoutX="581.0" layoutY="31.0" prefHeight="28.0" prefWidth="94.0" promptText="options" style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
       	<items>
 			<FXCollections fx:factory="observableArrayList">
 				<String fx:value="rename" />
@@ -68,8 +48,11 @@
 			</FXCollections>
 		</items>
       </ComboBox>
-      <TextField layoutX="386.0" layoutY="31.0" 
-      		prefHeight="28.0" prefWidth="180.0" 
-      		promptText="search photo" />
+      <TextField layoutX="386.0" layoutY="31.0" prefHeight="28.0" prefWidth="180.0" promptText="search photo" />
+      <Button id="backBtn" fx:id="addUser1" layoutY="9.0" mnemonicParsing="false" onAction="#back" prefHeight="67.0" prefWidth="77.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
