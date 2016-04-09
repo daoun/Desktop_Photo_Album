@@ -1,12 +1,16 @@
 package application;
 
-import java.net.URL;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Photo {
+public class Photo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2651057460302515220L;
 	private List<String> taglist = new ArrayList<String>();;
 	private String url;
 	private String caption;

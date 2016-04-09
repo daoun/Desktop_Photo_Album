@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.Photo;
-import application.PhotoAlbum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
