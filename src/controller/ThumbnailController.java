@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -61,7 +62,6 @@ public class ThumbnailController implements Initializable{
 		
 		Photo photo = new Photo(caption);
 		
-		
 		int row = numPhoto/5;
         int col = numPhoto%5;
         
@@ -102,6 +102,10 @@ public class ThumbnailController implements Initializable{
 			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/photo.fxml"));
+			
+			
+			int index = row*3 + col;
+			PhotoController.currentPhoto = index;
 			
 			AnchorPane root = (AnchorPane)loader.load();
 			//Stage currentStage = (Stage) loginStage.getScene().getWindow();

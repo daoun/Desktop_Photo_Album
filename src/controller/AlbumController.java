@@ -95,7 +95,7 @@ public class AlbumController implements Initializable{
 			loader.setLocation(getClass().getResource("/view/thumbnail.fxml"));
 			
 			int index = row*3 + col;
-			System.out.println(albumListGP.getChildren().get(index).getScene());
+			//System.out.println(albumListGP.getChildren().get(index).getScene());
 			ThumbnailController.currentAlbum = index;
 			
 			AnchorPane root = (AnchorPane)loader.load();

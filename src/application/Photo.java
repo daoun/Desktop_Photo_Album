@@ -33,6 +33,9 @@ public class Photo implements Serializable {
 	public void addTag(String tag) {
 		this.taglist.add(tag);
 	}
+	public int getTaglistSize(){
+		return taglist.size();
+	}
 	
 	public String getURL() {
 		return url;
