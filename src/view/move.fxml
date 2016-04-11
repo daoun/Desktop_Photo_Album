@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="330.0" prefWidth="300.0" 
+		style="-fx-background-color: black;" 
+		xmlns="http://javafx.com/javafx/8" 
+		xmlns:fx="http://javafx.com/fxml/1"
+		fx:controller="controller.MoveController">
+   <children>
+      <Text fill="WHITE" layoutX="85.0" layoutY="37.329267501831055" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Albums" AnchorPane.bottomAnchor="288.4430904388428" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.10163879394531" AnchorPane.topAnchor="18.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <ListView fx:id="listLV"
+      		layoutX="20.0" layoutY="53.0" 
+      		prefHeight="200.0" prefWidth="200.0" 
+      		AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="20.0" 
+      		AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="53.0" />
+      
+      <Button fx:id="moveBtn" text="Move" onAction="#move"
+      		layoutX="216.0" layoutY="281.0" 
+      		mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" 
+      		AnchorPane.bottomAnchor="17.0" 
+      		AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="25.0" 
+      		AnchorPane.topAnchor="285.0" />
+      <Button fx:id="cancelBtn" text="Cancel" onAction="#cancel"
+      		layoutX="142.0" layoutY="283.0" 
+      		mnemonicParsing="false" prefHeight="28.0" prefWidth="60.0" 
+      		AnchorPane.bottomAnchor="17.0" 
+      		AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="285.0" />
+   </children>
+</AnchorPane>
