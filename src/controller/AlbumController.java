@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package controller;
 
 import java.io.IOException;
