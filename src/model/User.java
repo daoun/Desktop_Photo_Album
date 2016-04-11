@@ -33,9 +33,21 @@ public class User implements Serializable{
 	public int getAlbumlistSize(){
 		return albumlist.size();
 	}
+	public void remove(int index){
+		this.albumlist.remove(index);
+	}
+	
 	
 	public String toString(){
 		return name;
+	}
+
+	public List<Album> getAlbumlist() {
+		return albumlist;
+	}
+
+	public void setAlbumlist(List<Album> albumlist) {
+		this.albumlist = albumlist;
 	}
 	
 }

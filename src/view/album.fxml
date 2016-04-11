@@ -37,14 +37,16 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <ComboBox fx:id="albumOption" layoutX="525.0" layoutY="31.0" prefWidth="150.0" promptText="options" style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
+      <ChoiceBox fx:id="albumOption" layoutX="525.0" layoutY="31.0" prefWidth="150.0" value="options" style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
       	<items>
 			<FXCollections fx:factory="observableArrayList">
 				<String fx:id="rename" fx:value="rename" />
 				<String fx:id="delete" fx:value="delete" />
+				<String fx:id="detail" fx:value="detail" />
+				
 			</FXCollections>
 		</items>
-      </ComboBox>
+      </ChoiceBox>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#back" prefHeight="67.0" prefWidth="77.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE">
          <font>
             <Font size="30.0" />

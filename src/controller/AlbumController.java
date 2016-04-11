@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
@@ -47,9 +49,10 @@ public class AlbumController implements Initializable{
 	@FXML private ScrollPane albumListSP;
 	@FXML private String rename;
 	@FXML private String delete;
-
+	@FXML private String detail;
 	
-	@FXML private ComboBox<String> albumOption;
+	
+	@FXML private ChoiceBox<String> albumOption;
 	
 	public int numAlbum = 0;
 	public int selected;
@@ -145,13 +148,15 @@ public class AlbumController implements Initializable{
 		dialog.setHeaderText("Create Album");
 		dialog.setTitle("Photo Album");
 		Optional<String> result = dialog.showAndWait();
-		if(result.isPresent()){
-			//System.out.println(result);
+		if(!duplicates(result.get()) && result.isPresent()){
+			
 			return result.get();
 		}
 		else{
 			return null;
 		}
+		
+		
 	}
 	
 	public void loadAlbums(){
@@ -219,6 +224,26 @@ public class AlbumController implements Initializable{
 		}
 	}
 	
+	public boolean duplicates(String name){
+		List<Album> list = AdminController.userlist.get(AlbumController.currentUser).getAlbumlist();
+		for(int i = 0; i < list.size(); i++){
+			if(list.get(i).getName().equals(name)){
+				warnDuplicate();
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void warnDuplicate(){
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Warning");
+		alert.setHeaderText("Invalid");
+		alert.setContentText("There exists an album with the same name.");
+
+		alert.showAndWait();
+	}
+	
 	public void rename(){
 		
 		
@@ -226,11 +251,14 @@ public class AlbumController implements Initializable{
 		dialog.setHeaderText("Rename Album");
 		dialog.setTitle("Modify Album");
 		Optional<String> result = dialog.showAndWait();
-		if(result.isPresent()){
+		
+		if(!duplicates(result.get()) && result.isPresent()){
 			AdminController.userlist.get(AlbumController.currentUser).getAlbum(selected).setName(result.get());
 			albumListGP.getChildren().remove(0, numAlbum);
 			loadAlbums();
+			
 		}
+		
 	}
 	
 	public void delete(){
@@ -242,8 +270,10 @@ public class AlbumController implements Initializable{
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
 			albumListGP.getChildren().remove(0, numAlbum);
-			//AdminController.userlist.get(AlbumController.currentUser).
+			AdminController.userlist.get(AlbumController.currentUser).remove(selected);
+			numAlbum--;
 			loadAlbums();
+			
 		} else {
 		    // ... user chose CANCEL or closed the dialog
 		}
@@ -275,6 +305,7 @@ public class AlbumController implements Initializable{
 				delete();
 			}
 			
+			albumOption.setValue(null);
 		});
 		
 	}
