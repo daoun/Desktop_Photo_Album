@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -15,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -26,7 +29,6 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -68,11 +70,11 @@ public class ThumbnailController implements Initializable{
 	public void search(ActionEvent event){
 		
 		String text = "";
+		Album album = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum);
 		
 		if(tagBtn.isSelected()){ //Tag search
 			
 			text = tagBar.getText();
-			Album album = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum);
 			
 			for(Photo p : album.getPhotolist()){
 				List<String> t = p.getTaglist();
@@ -85,10 +87,26 @@ public class ThumbnailController implements Initializable{
 			
 		}else{ //Date Search
 			
-			LocalDate startD, endD;
+			LocalDate startD = startDate.getValue();
+			LocalDate endD = endDate.getValue();
 			
-			if((startD = startDate.getValue()) == null || (endD = endDate.getValue()) == null){
+			if(startD == null || endD == null){
 				dateDoesNotExist();
+			}else{
+				Date date1 = Date.from(startD.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				Date date2 = Date.from(endD.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				
+				for(Photo p : album.getPhotolist()){
+					Date d = p.getDate();
+					
+					if(d.after(date1) && d.before(date2)){
+						//add photo
+					}
+					
+					
+				}
+				
+				
 			}
 		
 		}
@@ -146,7 +164,10 @@ public class ThumbnailController implements Initializable{
 		String caption = getCaption();
 		
 		Photo photo = new Photo(caption);
-		System.out.println(file.lastModified());
+		
+		long millisec = file.lastModified();
+
+		photo.setDate(new Date(millisec));
 		
 		int row = numPhoto/5;
         int col = numPhoto%5;
