@@ -28,7 +28,6 @@ public class AdminController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO set songlist to song list view (the content changes when songlist is modified)
 		userLV.setItems(userlist);
 	}
 	
@@ -44,10 +43,7 @@ public class AdminController implements Initializable {
 			    entered = result.get();
 		}
 		
-		//Can't have spaces in the username
 		entered = entered.replaceAll("\\s+","");
-		
-		System.out.println("/"+entered+"/");
 		
 		if(entered.length() != 0){
 			newUser = new User(entered);

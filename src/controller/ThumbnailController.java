@@ -104,7 +104,6 @@ public class ThumbnailController implements Initializable{
 			}else{
 				Date date1 = Date.from(startD.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				Date date2 = Date.from(endD.atStartOfDay(ZoneId.systemDefault()).toInstant());
-				int i = 0;
 				
 				photoListGP.getChildren().remove(0, numPhoto);
 				List<Photo> photos = new ArrayList<Photo>();
@@ -266,7 +265,6 @@ public class ThumbnailController implements Initializable{
 		dialog.setTitle("Photo Album");
 		Optional<String> result = dialog.showAndWait();
 		if(result.isPresent()){
-			//System.out.println(result);
 			return result.get();
 		}
 		else{

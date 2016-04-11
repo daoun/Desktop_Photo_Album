@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private List<Album> albumlist = new ArrayList<Album>();
@@ -36,7 +33,6 @@ public class User implements Serializable{
 	public void remove(int index){
 		this.albumlist.remove(index);
 	}
-	
 	
 	public String toString(){
 		return name;

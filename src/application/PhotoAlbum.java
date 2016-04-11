@@ -29,22 +29,18 @@ public class PhotoAlbum extends Application {
 		
 		File f = new File("users.ser");
 		if(f.exists() && !f.isDirectory()) { 
-			try
-		      {
-				
+			try {
 		         FileInputStream fileIn = new FileInputStream("users.ser");
 		         ObjectInputStream in = new ObjectInputStream(fileIn);
 		         List<User> userList = (List<User>)in.readObject();
 		         AdminController.userlist = FXCollections.observableList(userList);
 		         in.close();
 		         fileIn.close();
-		      }catch(IOException i)
-		      {
+		      }catch(IOException i) {
 		         i.printStackTrace();
 		         return;
 		      }
 		}
-		
 		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/view/login.fxml"));
@@ -66,19 +62,14 @@ public class PhotoAlbum extends Application {
 	
 	@Override
 	public void stop(){
-		try
-	      {
+		try {
 	         FileOutputStream fileOut = new FileOutputStream("users.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(new ArrayList<User>(AdminController.userlist));
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in users.ser");
-	      }catch(IOException i)
-	      {
+	      }catch(IOException i){
 	          i.printStackTrace();
 	      }
 	}
-	
-
 }

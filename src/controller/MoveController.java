@@ -23,7 +23,7 @@ public class MoveController implements Initializable{
 	
 	public void move(){
 		selected = listLV.getSelectionModel().getSelectedIndex();
-		// save photo, delete, move,
+		
 		Photo photo = AdminController.userlist.get(AlbumController.currentUser).
 			getAlbum(ThumbnailController.currentAlbum).getPhoto(ThumbnailController.selected);
 		
@@ -46,7 +46,6 @@ public class MoveController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		list.remove(0, list.size()-1);
 		
 		List<Album> albums = AdminController.userlist.get(AlbumController.currentUser).getAlbumlist();

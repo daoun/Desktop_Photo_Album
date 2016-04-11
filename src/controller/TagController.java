@@ -18,9 +18,7 @@ public class TagController implements Initializable{
 	
 	public void save(){
 		String s = tagTA.getText();
-		System.out.println("gettext="+s);
 		List<String> list = splitTags(s);
-		System.out.println("listofsplittagg="+list);
 		
 		AdminController.userlist.get(AlbumController.currentUser).
 			getAlbum(ThumbnailController.currentAlbum).
@@ -41,10 +39,7 @@ public class TagController implements Initializable{
 		s=s.replaceAll("\\s+","");
 		s=s.replaceAll("\\s","");
 		
-		System.out.println("strip="+s);
-		
 		for (String retval: s.split("#")){
-			System.out.println(retval);
 			list.add(retval);
 		}
 		for(int i = list.size()-1; i >= 0; i--){
@@ -61,7 +56,6 @@ public class TagController implements Initializable{
 		for(int i = 0; i <list.size(); i++){
 			all = all + "#" + list.get(i) + " ";
 		}
-		System.out.println(all);
 		return all;
 	}
 	@Override
@@ -69,14 +63,11 @@ public class TagController implements Initializable{
 		// TODO Auto-generated method stub
 		List<String> list = AdminController.userlist.get(AlbumController.currentUser).
 				getAlbum(ThumbnailController.currentAlbum).getPhoto(ThumbnailController.selected).getTaglist();
-		//tagTA = new TextArea();
 		
 		if(list.size() == 0){
-			System.out.println("Here?");
 			return;
 		}
 		else{
-			System.out.println("OR Here?");
 			tagTA.appendText(putTogetherTags(list));
 		}
 	}

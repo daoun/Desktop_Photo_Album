@@ -50,7 +50,6 @@ public class LoginController implements Initializable{
 	            
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -64,7 +63,7 @@ public class LoginController implements Initializable{
 					break;
 				}
 			}
-			System.out.println(AlbumController.currentUser);
+			
 			if(i == AdminController.userlist.size()){
 				userDoesNotExist();
 				return;
@@ -75,8 +74,7 @@ public class LoginController implements Initializable{
 				loader.setLocation(getClass().getResource("/view/album.fxml"));
 				
 				AnchorPane root = (AnchorPane)loader.load();
-				//Stage currentStage = (Stage) loginStage.getScene().getWindow();
-	        	
+				
 				Stage stage = new Stage();
 	            Scene scene = new Scene(root);
 				
@@ -90,7 +88,6 @@ public class LoginController implements Initializable{
 	            
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -107,7 +104,6 @@ public class LoginController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
 	}
 	

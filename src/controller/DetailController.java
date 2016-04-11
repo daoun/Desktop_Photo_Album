@@ -20,8 +20,6 @@ public class DetailController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		System.out.println(AdminController.userlist.get(AlbumController.currentUser).getAlbum(AlbumController.selected).getName());
-		
 		albumName.setText(AdminController.userlist.get(AlbumController.currentUser).getAlbum(AlbumController.selected).getName());
 		numPhoto.setText(Integer.toString(AdminController.userlist.get(AlbumController.currentUser).getAlbum(AlbumController.selected).getPhotolistSize()));
 		
@@ -75,7 +73,6 @@ public class DetailController implements Initializable {
 			if(p.getDate().after(newestDate)){
 				newestDate = p.getDate();
 			}
-			
 		}
 		
 		if(newestDate == null){

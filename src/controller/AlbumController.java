@@ -3,7 +3,6 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -39,7 +38,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
-import model.Photo;
 
 public class AlbumController implements Initializable{
 
@@ -69,7 +67,6 @@ public class AlbumController implements Initializable{
 		// if not alert that it is not unique
 		
 		Album album = new Album(name);
-		System.out.println(AdminController.userlist.size());
 		AdminController.userlist.get(currentUser).addAlbum(album);
 		
 		int row = numAlbum/3;
@@ -192,7 +189,6 @@ public class AlbumController implements Initializable{
             albumListGP.add(albumBP, col, row);
             
             albumBP.setOnMouseClicked(e ->{
-            	System.out.println("num click = "+ e.getClickCount());
             	if (e.getClickCount() == 1) {
             		selected = row*3 + col;
             		clearSelected();
@@ -305,13 +301,11 @@ public class AlbumController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		userTitle.setText(LoginController.username);
 		albumListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
 		
 		numAlbum = AdminController.userlist.get(currentUser).getAlbumlistSize();
 		
-		System.out.println("Username: "+AdminController.userlist.get(AlbumController.currentUser).getName());
 		if(AdminController.userlist.get(currentUser).getAlbumlistSize() > 0){
 			loadAlbums();
 		}
