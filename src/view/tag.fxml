@@ -6,20 +6,33 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="330.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TagController">
+<AnchorPane prefHeight="300.0" prefWidth="330.0" 
+		style="-fx-background-color: black;" 
+		xmlns="http://javafx.com/javafx/8" 
+		xmlns:fx="http://javafx.com/fxml/1" 
+		fx:controller="controller.TagController">
    <children>
-      <Text fill="WHITE" layoutX="146.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT TAG" textAlignment="CENTER" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="20.0">
+      <Text fill="WHITE" layoutX="146.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT TAG" textAlignment="CENTER" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="18.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextArea layoutX="14.0" layoutY="86.0" prefHeight="180.0" prefWidth="300.0" promptText="Enter tag" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="50.0" />
+      <TextArea layoutX="14.0" layoutY="86.0" prefHeight="180.0" prefWidth="300.0" promptText="Enter tag" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
       		
       <Text fill="WHITE" layoutX="14.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="** Please separate each tag with # and no spaces" textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="235.0">
          <font>
             <Font size="11.0" />
          </font>
       </Text>
-      <Button layoutX="245.0" layoutY="260.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="saveBtn" text="Save" onAction="#save"
+      		layoutX="255.0" layoutY="260.0" 
+      		mnemonicParsing="false" prefWidth="60.0" 
+      		style="-fx-background-color: white;" 
+      		AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+      <Button fx:id="cancelBtn" text="Cancel" onAction="#cancel"
+      		layoutX="182.0" layoutY="260.0" 
+      		mnemonicParsing="false" prefWidth="60.0" 
+      		style="-fx-background-color: white;" 
+      		AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="95.0" />
    </children>
 </AnchorPane>

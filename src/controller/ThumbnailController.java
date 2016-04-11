@@ -232,7 +232,7 @@ public class ThumbnailController implements Initializable{
 			loader.setLocation(getClass().getResource("/view/photo.fxml"));
 			
 			
-			int index = row*3 + col;
+			int index = row*5 + col;
 			PhotoController.currentPhoto = index;
 			
 			AnchorPane root = (AnchorPane)loader.load();
