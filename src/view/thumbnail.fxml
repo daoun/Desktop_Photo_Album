@@ -44,7 +44,8 @@
       	<items>
 			<FXCollections fx:factory="observableArrayList">
 				<String fx:value="recaption" />
-				<String fx:value="tag" />
+				<String fx:value="edit tag" />
+				<String fx:value="move" />
 				<String fx:value="delete" />
 				
 			</FXCollections>

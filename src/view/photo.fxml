@@ -9,46 +9,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections ?>
 
-<AnchorPane id="photoAP" maxHeight="450.0" maxWidth="791.0" minHeight="450.0" minWidth="700.0" prefHeight="450.0" prefWidth="791.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PhotoController">
+<AnchorPane id="photoAP" prefHeight="450.0" prefWidth="790.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PhotoController">
    <children>
       <GridPane layoutX="26.0" layoutY="74.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="0.0" prefHeight="430.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <ImageView fx:id="photoIV" fitHeight="430.0" fitWidth="340.0" pickOnBounds="true" preserveRatio="true" />
-            <AnchorPane GridPane.columnIndex="1">
+            <AnchorPane prefHeight="430.0" prefWidth="410.0" GridPane.columnIndex="1">
                <children>
-                  <Text fill="WHITE" layoutX="46.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption :" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="100.0">
+                  <Text fill="#aaaaaa" layoutX="46.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption :" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="100.0">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="48.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags :" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="200.0">
+                  <Text fill="#aaaaaa" layoutX="48.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags :" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="200.0">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="50.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="50.0">
+                  <Text fill="#aaaaaa" layoutX="50.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="50.0">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Text>
-                  <Text fx:id="captionT" fill="WHITE" layoutX="160.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no caption" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="130.0">
+                  <Text fx:id="captionT" fill="WHITE" layoutX="160.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no caption" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="130.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text fx:id="dateT" fill="WHITE" layoutX="148.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no date" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0">
+                  <Text fx:id="dateT" fill="WHITE" layoutX="148.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no date" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="50.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text fx:id="tagT" fill="WHITE" layoutX="69.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="230.0">
+                  <Text fx:id="tagT" fill="WHITE" layoutX="69.0" layoutY="249.0" 
+                  		strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="370"
+                  		AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="25.0" 
+                  		AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="230.0">
                      <font>
                         <Font size="20.0" />
                      </font>

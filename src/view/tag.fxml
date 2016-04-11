@@ -20,7 +20,7 @@
          </font>
       </Text>
       <TextArea fx:id="tagTA" promptText="Enter tag" 
-      		layoutX="14.0" layoutY="86.0" 
+      		layoutX="14.0" layoutY="86.0" wrapText="true"
       		prefHeight="180.0" prefWidth="300.0" 
       		AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" 
       		AnchorPane.topAnchor="50.0" />

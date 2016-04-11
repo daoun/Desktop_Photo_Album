@@ -32,8 +32,6 @@ public class PhotoAlbum extends Application {
 			try
 		      {
 				
-				printUsers();
-				
 		         FileInputStream fileIn = new FileInputStream("users.ser");
 		         ObjectInputStream in = new ObjectInputStream(fileIn);
 		         List<User> userList = (List<User>)in.readObject();
@@ -75,23 +73,11 @@ public class PhotoAlbum extends Application {
 	         out.writeObject(new ArrayList<User>(AdminController.userlist));
 	         out.close();
 	         fileOut.close();
-	         printUsers();
 	         System.out.printf("Serialized data is saved in users.ser");
 	      }catch(IOException i)
 	      {
 	          i.printStackTrace();
 	      }
-	}
-	
-	public static void printUsers(){
-		
-		int i = 0;
-		
-		for(User u : AdminController.userlist){
-			i++;
-			System.out.println("User" + i + ": " + u.getName());
-		}
-		
 	}
 	
 

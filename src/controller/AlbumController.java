@@ -141,7 +141,7 @@ public class AlbumController implements Initializable{
     	
 	}
 	
-	public String createAlbum(){
+	public static String createAlbum(){
 		Dialog<String> dialog = new TextInputDialog("Enter a user name.");
 		dialog.setHeaderText("Create Album");
 		dialog.setTitle("Photo Album");
@@ -222,7 +222,7 @@ public class AlbumController implements Initializable{
 		}
 	}
 	
-	public boolean duplicates(String name){
+	public static boolean duplicates(String name){
 		List<Album> list = AdminController.userlist.get(AlbumController.currentUser).getAlbumlist();
 		for(int i = 0; i < list.size(); i++){
 			if(list.get(i).getName().equals(name)){
@@ -233,7 +233,7 @@ public class AlbumController implements Initializable{
 		return false;
 	}
 	
-	public void warnDuplicate(){
+	public static void warnDuplicate(){
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Warning");
 		alert.setHeaderText("Invalid");

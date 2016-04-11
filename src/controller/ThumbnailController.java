@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -16,32 +17,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -54,12 +34,13 @@ public class ThumbnailController implements Initializable{
 
 	public static Stage photoStage;
 	public static Stage tagStage;
-	
+	public static Stage moveStage;
 	
 	@FXML private Button addPhoto;
 	@FXML private TextField tagBar;
 	@FXML private Button deletePhoto;
 	@FXML private Button searchBtn;
+	@FXML private Button searchBtn2;
 	@FXML private DatePicker startDate;
 	@FXML private DatePicker endDate;
 	@FXML private RadioButton tagBtn;
@@ -72,13 +53,19 @@ public class ThumbnailController implements Initializable{
 
 	final ToggleGroup group = new ToggleGroup();
 	
-
+	public List<Photo> searchedPhotos = new ArrayList<Photo>();
 	public static int selected;
 	public int numPhoto = 0;
 	public static int currentAlbum;
 	
 	public void createAlbumWithSearch(ActionEvent event){
-		
+		String name = AlbumController.createAlbum();
+		if(name == null){
+			return;
+		}
+		Album al = new Album(name);
+		al.setPhotolist(searchedPhotos);
+		AdminController.userlist.get(AlbumController.currentUser).addAlbum(al);
 	}
 	
 	
@@ -90,15 +77,22 @@ public class ThumbnailController implements Initializable{
 		if(tagBtn.isSelected()){ //Tag search
 			
 			text = tagBar.getText();
+			photoListGP.getChildren().remove(0, numPhoto);
+			List<Photo> photos = new ArrayList<Photo>();
 			
 			for(Photo p : album.getPhotolist()){
 				List<String> t = p.getTaglist();
 				for(String s : t){
 					if(s.equals(text)){
-						//Show pictures
+						
+						photos.add(p);
 					}
 				}
+				
 			}
+			searchedPhotos = photos;
+			loadPhotos(photos);
+			numPhoto = photos.size();
 			
 		}else{ //Date Search
 			
@@ -112,63 +106,20 @@ public class ThumbnailController implements Initializable{
 				Date date2 = Date.from(endD.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				int i = 0;
 				
+				photoListGP.getChildren().remove(0, numPhoto);
+				List<Photo> photos = new ArrayList<Photo>();
+				
 				for(Photo p : album.getPhotolist()){
 					Date d = p.getDate();
 					
 					if(d.after(date1) && d.before(date2)){
-
-						///
-						
-						int row = i/5;
-			        	int col = i%5;
-			        	
-			        	if(row >1 && col == 0){
-			            	RowConstraints rc = new RowConstraints();
-			                rc.setPrefHeight(116);
-			                rc.setVgrow(Priority.ALWAYS);
-			                photoListGP.getRowConstraints().add(rc);
-			            }
-			            BorderPane photoBP = new BorderPane();
-			            
-			            ImageView image = new ImageView(p.getURL());
-			            image.setFitHeight(100);
-			            image.setFitWidth(100);
-			            
-			            String caption = p.getCaption();
-			            Text captionT = new Text(caption);
-			            AnchorPane.setBottomAnchor(captionT, 10.0);
-			            
-			            photoBP.setCenter(image);
-			            photoBP.setBottom(captionT);
-			            BorderPane.setAlignment(captionT, Pos.CENTER);
-			            
-			            photoListGP.add(photoBP, col, row);
-			            
-			            i++;
-			            
-			            photoBP.setOnMouseClicked(e ->{
-			            	selected = row*5 + col;
-			        		
-			            	if (e.getClickCount() == 1) {
-			            		clearSelected();
-			            		photoBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
-
-			            	}
-			            	else if(e.getClickCount() == 2){
-			            		openPhoto(caption, row, col);
-			            	}
-
-			            });
-						
-						////
+						photos.add(p);
 					}
-					
-					
 				}
-				
-				
+				searchedPhotos = photos;
+				loadPhotos(photos);
+				numPhoto = photos.size();
 			}
-		
 		}
 	}
 	
@@ -323,9 +274,9 @@ public class ThumbnailController implements Initializable{
 		}
 	}
 	
-	public void loadPhotos(){
+	public void loadPhotos(List<Photo> photos){
         int i = 0;
-        for(i = 0; i < AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize(); i++){
+        for(i = 0; i < photos.size(); i++){
         	int row = i/5;
         	int col = i%5;
         	
@@ -337,13 +288,11 @@ public class ThumbnailController implements Initializable{
             }
             BorderPane photoBP = new BorderPane();
             
-            ImageView image = new ImageView(AdminController.userlist.
-            		get(AlbumController.currentUser).
-            		getAlbum(currentAlbum).getPhoto(i).getURL());
+            ImageView image = new ImageView(photos.get(i).getURL());
             image.setFitHeight(100);
             image.setFitWidth(100);
             
-            String caption = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhoto(i).getCaption();
+            String caption = photos.get(i).getCaption();
             Text captionT = new Text(caption);
             AnchorPane.setBottomAnchor(captionT, 10.0);
             
@@ -370,6 +319,8 @@ public class ThumbnailController implements Initializable{
         
 	}
 	
+	
+	
 	public void back(ActionEvent e){
 		AlbumController.thumbnailStage.close();
 		LoginController.albumStage.show();
@@ -392,7 +343,7 @@ public class ThumbnailController implements Initializable{
 		if(result.isPresent()){
 			AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhoto(selected).setCaption(result.get());
 			photoListGP.getChildren().remove(0, numPhoto);
-			loadPhotos();
+			loadPhotos(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolist());
 		}
 	}
 	
@@ -423,6 +374,34 @@ public class ThumbnailController implements Initializable{
 			e1.printStackTrace();
 		}
 	}
+	
+	public void move(){
+		try {
+			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/view/move.fxml"));
+			
+			AnchorPane root = (AnchorPane)loader.load();
+			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
+        	
+			Stage stage = new Stage();
+            Scene scene = new Scene(root);
+			
+            stage.setScene(scene);  
+            stage.setResizable(false);  
+            stage.setTitle("Move Photo");
+            
+            moveStage = stage;
+            
+            stage.show();
+            //currentStage.close();
+            
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
 	public void delete(){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -435,7 +414,7 @@ public class ThumbnailController implements Initializable{
 			photoListGP.getChildren().remove(0, numPhoto);
 			AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).remove(selected);
 			numPhoto--;
-			loadPhotos();
+			loadPhotos(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolist());
 			
 		} else {
 		    // ... user chose CANCEL or closed the dialog
@@ -451,9 +430,8 @@ public class ThumbnailController implements Initializable{
 		photoListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
 		numPhoto = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize();
 		
-		System.out.println("Album Name: "+AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getName());
 		if(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize() > 0){
-			loadPhotos();
+			loadPhotos(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolist());
 		}
 		
 		startDate.setVisible(false);
@@ -469,6 +447,9 @@ public class ThumbnailController implements Initializable{
 				tag();
 			}
 			else if(photoOption.getSelectionModel().getSelectedIndex() == 2){
+				move();
+			}
+			else if(photoOption.getSelectionModel().getSelectedIndex() == 3){
 				delete();
 			}
 			
