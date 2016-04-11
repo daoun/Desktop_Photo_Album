@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -22,7 +24,6 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
@@ -38,6 +39,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
+import model.Photo;
 
 public class AlbumController implements Initializable{
 
@@ -50,16 +52,10 @@ public class AlbumController implements Initializable{
 	@FXML private String rename;
 	@FXML private String delete;
 	@FXML private String detail;
-	@FXML private Text name;
-	@FXML private Text numPhoto;
-	@FXML private Text oldestDate;
-	@FXML private Text rangeDate;
-	
-	
 	@FXML private ChoiceBox<String> albumOption;
 	
 	public int numAlbum = 0;
-	public int selected;
+	public static int selected;
 	public static int currentUser;
 	
 	public void addAlbum(ActionEvent event){
@@ -285,10 +281,6 @@ public class AlbumController implements Initializable{
 	
 	public void details(){
 		
-		name.setText(AdminController.userlist.get(AlbumController.currentUser).getAlbum(selected).getName());
-		numPhoto.setText(AdminController.userlist.get(AlbumController.currentUser).getAlbum(selected).getPhotolistSize());
-		
-		
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
@@ -303,7 +295,6 @@ public class AlbumController implements Initializable{
             stage.setResizable(false);  
             stage.setTitle("Detail");
             stage.show();
-            //currentStage.close();
             
 			
 		} catch (IOException e1) {
