@@ -25,8 +25,6 @@ public class PhotoController implements Initializable{
 	@FXML private ImageView photoIV;
 	@FXML private AnchorPane photoAP;
 	
-	
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Photo photo = AdminController.userlist.get(AlbumController.currentUser).

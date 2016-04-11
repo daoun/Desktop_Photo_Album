@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -192,7 +193,6 @@ public class ThumbnailController implements Initializable{
             photoListGP.getRowConstraints().add(rc);
         }
         BorderPane photoBP = new BorderPane();
-        
         ImageView image = new ImageView("file:" + path);
         photo.setURL("file:" + path);
         image.setFitHeight(100);
@@ -241,6 +241,16 @@ public class ThumbnailController implements Initializable{
 			Stage stage = new Stage();
             Scene scene = new Scene(root);
 			
+            root.setOnKeyPressed(e -> {
+            	System.out.println(e.getCode());
+            	if (e.getCode() == KeyCode.RIGHT) { // don't use toString here!!!
+					System.out.println("right");
+				} else if (e.getCode() == KeyCode.LEFT) {
+					System.out.println("left");
+				}
+            });
+            
+            
             stage.setScene(scene);  
             stage.setResizable(false);  
             stage.setTitle(name);
