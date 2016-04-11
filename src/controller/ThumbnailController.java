@@ -61,6 +61,7 @@ public class ThumbnailController implements Initializable{
 		String caption = getCaption();
 		
 		Photo photo = new Photo(caption);
+		System.out.println(file.lastModified());
 		
 		int row = numPhoto/5;
         int col = numPhoto%5;
@@ -194,6 +195,8 @@ public class ThumbnailController implements Initializable{
 		// TODO Auto-generated method stub
 		albumTitle.setText(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getName());
 		photoListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
+		numPhoto = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize();
+		
 		System.out.println("Album Name: "+AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getName());
 		if(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize() > 0){
 			loadPhotos();
