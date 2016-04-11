@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.FXCollections ?>
+
+<AnchorPane maxHeight="450.0" maxWidth="700.0" minHeight="250.0" minWidth="399.0" prefHeight="250.0" prefWidth="454.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AlbumController">
+   <children>
+      <Text fx:id="name" fill="WHITE" layoutX="114.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no date" AnchorPane.leftAnchor="114.0" AnchorPane.topAnchor="64.41796875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="35.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="63.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="35.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Oldest Photo:" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="139.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="35.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Photos:" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="102.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="numPhoto" fill="WHITE" layoutX="232.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no date">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="oldestDate" fill="WHITE" layoutX="254.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no date">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="31.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Range of Photos:">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="rangeDate" fill="WHITE" layoutX="266.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no date">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="35.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DETAILS">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+   </children>
+  
+  
+</AnchorPane>
