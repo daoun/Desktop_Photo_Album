@@ -47,9 +47,9 @@ public class Photo implements Serializable {
 	public Date getDate() {
 		return date;
 	}
-	@SuppressWarnings("deprecation")
-	public void setDate(int year, int month, int day) {
-		this.date = new Date(year, month, day);
+	
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	public String toString(){

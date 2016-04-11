@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -23,20 +24,20 @@ public class PhotoController implements Initializable{
 	@FXML private TextFlow tagTF;
 	@FXML private ImageView photoIV;
 	
-	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Photo photo = AdminController.userlist.get(AlbumController.currentUser).
 				getAlbum(ThumbnailController.currentAlbum).getPhoto(currentPhoto);
 		
-		photoIV = new ImageView(photo.getURL());
+		Image image = new Image(photo.getURL());
+		
+		photoIV.setImage(image);
 		
 		captionT.setText(photo.getCaption());
 		
 		Date date = photo.getDate();
 		if(date != null){
-			dateT.setText(date.getMonth() + "//" + date.getDate() + "//" + date.getYear());
+			dateT.setText(date.toString());
 		}
 		
 		
