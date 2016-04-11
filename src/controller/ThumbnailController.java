@@ -376,9 +376,9 @@ public class ThumbnailController implements Initializable{
 
 	public void delete(){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Modify Album");
-		alert.setHeaderText("Delete Album");
-		alert.setContentText("Are you sure you want to delete this album?");
+		alert.setTitle("Modify Photo");
+		alert.setHeaderText("Delete Photo");
+		alert.setContentText("Are you sure you want to delete this photo?");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
