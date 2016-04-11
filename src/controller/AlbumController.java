@@ -12,12 +12,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
@@ -38,13 +41,18 @@ public class AlbumController implements Initializable{
 
 	public static Stage thumbnailStage;
 	@FXML private Button albumAddBtn;
+	@FXML private Button backBtn;
 	@FXML private Text userTitle;
 	@FXML private GridPane albumListGP;
 	@FXML private ScrollPane albumListSP;
+	@FXML private String rename;
+	@FXML private String delete;
+
 	
-	@FXML private ComboBox<?> albumOption;
+	@FXML private ComboBox<String> albumOption;
 	
 	public int numAlbum = 0;
+	public int selected;
 	public static int currentUser;
 	
 	public void addAlbum(ActionEvent event){
@@ -85,11 +93,12 @@ public class AlbumController implements Initializable{
         
         albumListGP.add(albumBP, col, row);
         
-        albumListGP.setOnMouseClicked(e ->{
-        	System.out.println("num click = "+ e.getClickCount());
+        albumBP.setOnMouseClicked(e ->{
+        	
         	if (e.getClickCount() == 1) {
-        		System.out.println("Clicked once");
-        		
+        		selected = row*3 + col;
+        		clearSelected();
+        		albumBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
         	}
         	else if(e.getClickCount() == 2){
         		openAlbum(name, row, col);
@@ -179,12 +188,14 @@ public class AlbumController implements Initializable{
             
             albumListGP.add(albumBP, col, row);
             
-            albumListGP.setOnMouseClicked(e ->{
+            albumBP.setOnMouseClicked(e ->{
             	System.out.println("num click = "+ e.getClickCount());
             	if (e.getClickCount() == 1) {
-            		System.out.println("Clicked once");
+            		selected = row*3 + col;
+            		clearSelected();
             		albumBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
             		
+                	
             	}
             	else if(e.getClickCount() == 2){
             		openAlbum(name, row, col);
@@ -200,6 +211,46 @@ public class AlbumController implements Initializable{
 		PhotoAlbum.loginStage.show();
 	}
 	
+	public void clearSelected(){
+		int size = AdminController.userlist.get(AlbumController.currentUser).getAlbumlistSize();
+		for(int i = 0; i <size; i++){
+			BorderPane bp = (BorderPane)albumListGP.getChildren().get(i);
+			bp.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.NONE, CornerRadii.EMPTY, new BorderWidths(2))));
+		}
+	}
+	
+	public void rename(){
+		
+		
+		Dialog<String> dialog = new TextInputDialog("Enter a new name for the album.");
+		dialog.setHeaderText("Rename Album");
+		dialog.setTitle("Modify Album");
+		Optional<String> result = dialog.showAndWait();
+		if(result.isPresent()){
+			AdminController.userlist.get(AlbumController.currentUser).getAlbum(selected).setName(result.get());
+			albumListGP.getChildren().remove(0, numAlbum);
+			loadAlbums();
+		}
+	}
+	
+	public void delete(){
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Modify Album");
+		alert.setHeaderText("Delete Album");
+		alert.setContentText("Are you sure you want to delete this album?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			albumListGP.getChildren().remove(0, numAlbum);
+			//AdminController.userlist.get(AlbumController.currentUser).
+			loadAlbums();
+		} else {
+		    // ... user chose CANCEL or closed the dialog
+		}
+		
+		
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -212,6 +263,19 @@ public class AlbumController implements Initializable{
 		if(AdminController.userlist.get(currentUser).getAlbumlistSize() > 0){
 			loadAlbums();
 		}
+		
+		clearSelected();
+		
+		
+		albumOption.setOnAction(e->{
+			if(albumOption.getSelectionModel().getSelectedIndex() == 0){
+				rename();
+			}
+			else if(albumOption.getSelectionModel().getSelectedIndex() == 1){
+				delete();
+			}
+			
+		});
 		
 	}
 	

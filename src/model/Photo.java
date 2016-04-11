@@ -55,4 +55,12 @@ public class Photo implements Serializable {
 	public String toString(){
 		return caption;
 	}
+
+	public List<String> getTaglist() {
+		return taglist;
+	}
+
+	public void setTaglist(List<String> taglist) {
+		this.taglist = taglist;
+	}
 }

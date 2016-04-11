@@ -48,16 +48,16 @@
 			</FXCollections>
 		</items>
       </ComboBox>
-      <TextField id="tagBar" layoutX="22.0" layoutY="97.0" prefHeight="28.0" prefWidth="180.0" promptText="Enter tag" />
-      <Button id="backBtn" fx:id="addUser1" layoutY="9.0" mnemonicParsing="false" onAction="#back" prefHeight="67.0" prefWidth="77.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE">
+      <TextField fx:id="tagBar" layoutX="22.0" layoutY="97.0" prefHeight="28.0" prefWidth="180.0" promptText="Enter tag" />
+      <Button fx:id="backBtn" layoutY="9.0" mnemonicParsing="false" onAction="#back" prefHeight="67.0" prefWidth="77.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <DatePicker id="startDate" layoutX="22.0" layoutY="138.0" promptText="Start Date" />
-      <RadioButton id="dateBtn" layoutX="290.0" layoutY="102.0" mnemonicParsing="false" text="Date" textFill="WHITE" onAction="#showDate" />
-      <RadioButton id="tagBtn" layoutX="223.0" layoutY="102.0" mnemonicParsing="false" selected="true" text="Tag" textFill="WHITE" onAction="#hideDate"/>
-      <DatePicker id="endDate" layoutX="253.0" layoutY="138.0" promptText="End Date" />
-      <Button id="searchBtn" layoutX="356.0" layoutY="97.0" mnemonicParsing="false" text="Search" />
+      <DatePicker fx:id="startDate" layoutX="22.0" layoutY="138.0" promptText="Start Date" onAction="#showEndDate" />
+      <RadioButton fx:id="dateBtn" layoutX="290.0" layoutY="102.0" mnemonicParsing="false" text="Date" textFill="WHITE" onAction="#showDate" />
+      <RadioButton fx:id="tagBtn" layoutX="223.0" layoutY="102.0" mnemonicParsing="false" selected="true" text="Tag" textFill="WHITE" onAction="#hideDate"/>
+      <DatePicker fx:id="endDate" layoutX="253.0" layoutY="138.0" promptText="End Date" />
+      <Button fx:id="searchBtn" layoutX="356.0" layoutY="97.0" mnemonicParsing="false" text="Search" onAction="#search" />
    </children>
 </AnchorPane>

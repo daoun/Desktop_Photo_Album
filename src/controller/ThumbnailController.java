@@ -3,6 +3,8 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -12,8 +14,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
@@ -21,6 +25,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +36,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import model.Album;
 import model.Photo;
 
 public class ThumbnailController implements Initializable{
@@ -48,28 +56,82 @@ public class ThumbnailController implements Initializable{
 	@FXML private Text albumTitle;
 	@FXML private GridPane photoListGP;
 	@FXML private ScrollPane photoListSP;
-	
-	
 	@FXML private ComboBox<?> photoOption;
+
+	final ToggleGroup group = new ToggleGroup();
+	
+
 	
 	public int numPhoto = 0;
 	public static int currentAlbum;
 	
+	public void search(ActionEvent event){
+		
+		String text = "";
+		
+		if(tagBtn.isSelected()){ //Tag search
+			
+			text = tagBar.getText();
+			Album album = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum);
+			
+			for(Photo p : album.getPhotolist()){
+				List<String> t = p.getTaglist();
+				for(String s : t){
+					if(s.equals(text)){
+						//Show pictures
+					}
+				}
+			}
+			
+		}else{ //Date Search
+			
+			LocalDate startD, endD;
+			
+			if((startD = startDate.getValue()) == null || (endD = endDate.getValue()) == null){
+				dateDoesNotExist();
+			}
+		
+		}
+	}
+	
 	public void showDate(ActionEvent event){
-		tagBtn.setSelected(false);
 		tagBar.setVisible(false);
 		startDate.setVisible(true);
+		
+		
+		final Callback<DatePicker, DateCell> dayCellFactory = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
+	                           
+	                            if (item.isBefore(
+	                                    startDate.getValue().plusDays(1))
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }   
+	                    }
+	                };
+	            }
+	     };
+	     
+	     endDate.setDayCellFactory(dayCellFactory);
+		
+	}
+	
+	public void showEndDate(ActionEvent event){
 		endDate.setVisible(true);
-
 	}
 	
 	public void hideDate(ActionEvent event){
 		startDate.setVisible(false);
 		endDate.setVisible(false);
 		tagBar.setVisible(true);
-		
 	}
-	
 	
 	public void addPhoto(ActionEvent event){
 		
@@ -225,6 +287,20 @@ public class ThumbnailController implements Initializable{
 			loadPhotos();
 		}
 		
+		startDate.setVisible(false);
+		endDate.setVisible(false);
+		tagBtn.setToggleGroup(group);
+		dateBtn.setToggleGroup(group);
+		
+	}
+	
+	public void dateDoesNotExist(){
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Invalid Date");
+		alert.setHeaderText(null);
+		alert.setContentText("Please select a valid date range");
+
+		alert.showAndWait();
 	}
 	
 	

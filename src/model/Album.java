@@ -42,5 +42,13 @@ public class Album implements Serializable {
 		}
 		return ret;
 	}
+
+	public List<Photo> getPhotolist() {
+		return photolist;
+	}
+
+	public void setPhotolist(List<Photo> photolist) {
+		this.photolist = photolist;
+	}
 	
 }
