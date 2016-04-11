@@ -53,6 +53,8 @@ import model.Photo;
 public class ThumbnailController implements Initializable{
 
 	public static Stage photoStage;
+	public static Stage tagStage;
+	
 	
 	@FXML private Button addPhoto;
 	@FXML private TextField tagBar;
@@ -71,7 +73,7 @@ public class ThumbnailController implements Initializable{
 	final ToggleGroup group = new ToggleGroup();
 	
 
-	public int selected;
+	public static int selected;
 	public int numPhoto = 0;
 	public static int currentAlbum;
 	
@@ -168,6 +170,9 @@ public class ThumbnailController implements Initializable{
 		if(file != null){
 			path = file.getPath();
 		}
+		else{
+			return;
+		}
 		
 		String caption = getCaption();
 		
@@ -204,8 +209,9 @@ public class ThumbnailController implements Initializable{
         AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).addPhoto(photo);
         
         photoBP.setOnMouseClicked(e ->{
+        	selected = row*5 + col;
         	if (e.getClickCount() == 1) {
-        		selected = row*5 + col;
+        		
         		clearSelected();
         		photoBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
 
@@ -298,9 +304,9 @@ public class ThumbnailController implements Initializable{
             photoListGP.add(photoBP, col, row);
             
             photoBP.setOnMouseClicked(e ->{
-            	
+            	selected = row*5 + col;
+        		
             	if (e.getClickCount() == 1) {
-            		selected = row*5 + col;
             		clearSelected();
             		photoBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
 
@@ -320,7 +326,7 @@ public class ThumbnailController implements Initializable{
 	}
 	
 	public void clearSelected(){
-		int size = AdminController.userlist.get(AlbumController.currentUser).getAlbumlistSize();
+		int size = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize();
 		for(int i = 0; i <size; i++){
 			BorderPane bp = (BorderPane)photoListGP.getChildren().get(i);
 			bp.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.NONE, CornerRadii.EMPTY, new BorderWidths(2))));
@@ -341,7 +347,31 @@ public class ThumbnailController implements Initializable{
 	}
 	
 	public void tag(){
-		
+		try {
+			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/view/tag.fxml"));
+			
+			AnchorPane root = (AnchorPane)loader.load();
+			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
+        	
+			Stage stage = new Stage();
+            Scene scene = new Scene(root);
+			
+            stage.setScene(scene);  
+            stage.setResizable(false);  
+            stage.setTitle("Edit Tag");
+            
+            tagStage = stage;
+            
+            stage.show();
+            //currentStage.close();
+            
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	public void delete(){

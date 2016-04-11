@@ -33,6 +33,9 @@ public class Album implements Serializable {
 	public int getPhotolistSize(){
 		return photolist.size();
 	}
+	public void remove(int index){
+		this.photolist.remove(index);
+	}
 	
 	public String toString(){
 		String ret = name +": ";
