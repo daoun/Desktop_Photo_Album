@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -15,9 +14,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -35,20 +37,41 @@ public class ThumbnailController implements Initializable{
 	public static Stage photoStage;
 	
 	@FXML private Button addPhoto;
+	@FXML private TextField tagBar;
 	@FXML private Button deletePhoto;
-	
+	@FXML private Button searchBtn;
+	@FXML private DatePicker startDate;
+	@FXML private DatePicker endDate;
+	@FXML private RadioButton tagBtn;
+	@FXML private RadioButton dateBtn;
 	@FXML private Button photoAddBtn;
 	@FXML private Text albumTitle;
 	@FXML private GridPane photoListGP;
 	@FXML private ScrollPane photoListSP;
+	
 	
 	@FXML private ComboBox<?> photoOption;
 	
 	public int numPhoto = 0;
 	public static int currentAlbum;
 	
-	public void addPhoto(ActionEvent event){
+	public void showDate(ActionEvent event){
+		tagBtn.setSelected(false);
+		tagBar.setVisible(false);
+		startDate.setVisible(true);
+		endDate.setVisible(true);
+
+	}
+	
+	public void hideDate(ActionEvent event){
+		startDate.setVisible(false);
+		endDate.setVisible(false);
+		tagBar.setVisible(true);
 		
+	}
+	
+	
+	public void addPhoto(ActionEvent event){
 		
 		
 		final FileChooser fc = new FileChooser();

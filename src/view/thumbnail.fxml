@@ -55,8 +55,8 @@
          </font>
       </Button>
       <DatePicker id="startDate" layoutX="22.0" layoutY="138.0" promptText="Start Date" />
-      <RadioButton id="dateBtn" layoutX="290.0" layoutY="102.0" mnemonicParsing="false" text="Date" textFill="WHITE" />
-      <RadioButton id="tagBtn" layoutX="223.0" layoutY="102.0" mnemonicParsing="false" text="Tag" textFill="WHITE" />
+      <RadioButton id="dateBtn" layoutX="290.0" layoutY="102.0" mnemonicParsing="false" text="Date" textFill="WHITE" onAction="#showDate" />
+      <RadioButton id="tagBtn" layoutX="223.0" layoutY="102.0" mnemonicParsing="false" selected="true" text="Tag" textFill="WHITE" onAction="#hideDate"/>
       <DatePicker id="endDate" layoutX="253.0" layoutY="138.0" promptText="End Date" />
       <Button id="searchBtn" layoutX="356.0" layoutY="97.0" mnemonicParsing="false" text="Search" />
    </children>
