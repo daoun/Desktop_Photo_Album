@@ -56,10 +56,11 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <DatePicker fx:id="startDate" layoutX="22.0" layoutY="138.0" promptText="Start Date" onAction="#showEndDate" />
-      <RadioButton fx:id="dateBtn" layoutX="290.0" layoutY="102.0" mnemonicParsing="false" text="Date" textFill="WHITE" onAction="#showDate" />
-      <RadioButton fx:id="tagBtn" layoutX="223.0" layoutY="102.0" mnemonicParsing="false" selected="true" text="Tag" textFill="WHITE" onAction="#hideDate"/>
+      <DatePicker fx:id="startDate" layoutX="22.0" layoutY="138.0" onAction="#showEndDate" promptText="Start Date" />
+      <RadioButton fx:id="dateBtn" layoutX="290.0" layoutY="102.0" mnemonicParsing="false" onAction="#showDate" text="Date" textFill="WHITE" />
+      <RadioButton fx:id="tagBtn" layoutX="223.0" layoutY="102.0" mnemonicParsing="false" onAction="#hideDate" selected="true" text="Tag" textFill="WHITE" />
       <DatePicker fx:id="endDate" layoutX="253.0" layoutY="138.0" promptText="End Date" />
-      <Button fx:id="searchBtn" layoutX="356.0" layoutY="97.0" mnemonicParsing="false" text="Search" onAction="#search" />
+      <Button fx:id="searchBtn" layoutX="356.0" layoutY="97.0" mnemonicParsing="false" onAction="#search" text="Search" />
+      <Button fx:id="searchBtn2" layoutX="439.0" layoutY="97.0" mnemonicParsing="false" onAction="#createAlbumWithSearch" text="Create Album with Search Result" />
    </children>
 </AnchorPane>

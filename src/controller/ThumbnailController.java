@@ -77,6 +77,11 @@ public class ThumbnailController implements Initializable{
 	public int numPhoto = 0;
 	public static int currentAlbum;
 	
+	public void createAlbumWithSearch(ActionEvent event){
+		
+	}
+	
+	
 	public void search(ActionEvent event){
 		
 		String text = "";
@@ -105,12 +110,57 @@ public class ThumbnailController implements Initializable{
 			}else{
 				Date date1 = Date.from(startD.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				Date date2 = Date.from(endD.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				int i = 0;
 				
 				for(Photo p : album.getPhotolist()){
 					Date d = p.getDate();
 					
 					if(d.after(date1) && d.before(date2)){
-						//add photo
+
+						///
+						
+						int row = i/5;
+			        	int col = i%5;
+			        	
+			        	if(row >1 && col == 0){
+			            	RowConstraints rc = new RowConstraints();
+			                rc.setPrefHeight(116);
+			                rc.setVgrow(Priority.ALWAYS);
+			                photoListGP.getRowConstraints().add(rc);
+			            }
+			            BorderPane photoBP = new BorderPane();
+			            
+			            ImageView image = new ImageView(p.getURL());
+			            image.setFitHeight(100);
+			            image.setFitWidth(100);
+			            
+			            String caption = p.getCaption();
+			            Text captionT = new Text(caption);
+			            AnchorPane.setBottomAnchor(captionT, 10.0);
+			            
+			            photoBP.setCenter(image);
+			            photoBP.setBottom(captionT);
+			            BorderPane.setAlignment(captionT, Pos.CENTER);
+			            
+			            photoListGP.add(photoBP, col, row);
+			            
+			            i++;
+			            
+			            photoBP.setOnMouseClicked(e ->{
+			            	selected = row*5 + col;
+			        		
+			            	if (e.getClickCount() == 1) {
+			            		clearSelected();
+			            		photoBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
+
+			            	}
+			            	else if(e.getClickCount() == 2){
+			            		openPhoto(caption, row, col);
+			            	}
+
+			            });
+						
+						////
 					}
 					
 					
