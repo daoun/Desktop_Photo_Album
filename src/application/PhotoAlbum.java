@@ -56,7 +56,6 @@ public class PhotoAlbum extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Photo Album Log in");
 		primaryStage.setResizable(false);  
-		AdminController.defaultAdmin();
 		loginStage = primaryStage;
 		primaryStage.show();
 		
