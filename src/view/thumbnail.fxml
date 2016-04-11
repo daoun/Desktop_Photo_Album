@@ -40,14 +40,16 @@
             <Font size="30.0" />
          </font>
       </Button>
-      <ComboBox id="photoOption" layoutX="592.0" layoutY="30.0" prefHeight="28.0" prefWidth="94.0" promptText="options" style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
+      <ChoiceBox fx:id="photoOption" layoutX="592.0" layoutY="30.0" prefHeight="28.0" prefWidth="94.0" style="-fx-border-radius: 0; -fx-background-color: white; -fx-border-color: white;">
       	<items>
 			<FXCollections fx:factory="observableArrayList">
-				<String fx:value="rename" />
+				<String fx:value="recaption" />
+				<String fx:value="tag" />
 				<String fx:value="delete" />
+				
 			</FXCollections>
 		</items>
-      </ComboBox>
+      </ChoiceBox>
       <TextField fx:id="tagBar" layoutX="22.0" layoutY="97.0" prefHeight="28.0" prefWidth="180.0" promptText="Enter tag" />
       <Button fx:id="backBtn" layoutY="9.0" mnemonicParsing="false" onAction="#back" prefHeight="67.0" prefWidth="77.0" style="-fx-background-color: black;" text="&lt;" textFill="WHITE">
          <font>

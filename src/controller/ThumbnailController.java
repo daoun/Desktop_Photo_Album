@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -31,10 +33,16 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -58,12 +66,12 @@ public class ThumbnailController implements Initializable{
 	@FXML private Text albumTitle;
 	@FXML private GridPane photoListGP;
 	@FXML private ScrollPane photoListSP;
-	@FXML private ComboBox<?> photoOption;
+	@FXML private ChoiceBox<String> photoOption;
 
 	final ToggleGroup group = new ToggleGroup();
 	
 
-	
+	public int selected;
 	public int numPhoto = 0;
 	public static int currentAlbum;
 	
@@ -196,8 +204,15 @@ public class ThumbnailController implements Initializable{
         AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).addPhoto(photo);
         
         photoBP.setOnMouseClicked(e ->{
-        	
-        	openPhoto(caption, row, col);
+        	if (e.getClickCount() == 1) {
+        		selected = row*5 + col;
+        		clearSelected();
+        		photoBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
+
+        	}
+        	else if(e.getClickCount() == 2){
+        		openPhoto(caption, row, col);
+        	}
 
         });
 		
@@ -284,7 +299,15 @@ public class ThumbnailController implements Initializable{
             
             photoBP.setOnMouseClicked(e ->{
             	
-            	openPhoto(caption, row, col);
+            	if (e.getClickCount() == 1) {
+            		selected = row*5 + col;
+            		clearSelected();
+            		photoBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
+
+            	}
+            	else if(e.getClickCount() == 2){
+            		openPhoto(caption, row, col);
+            	}
 
             });
         }
@@ -295,7 +318,52 @@ public class ThumbnailController implements Initializable{
 		AlbumController.thumbnailStage.close();
 		LoginController.albumStage.show();
 	}
+	
+	public void clearSelected(){
+		int size = AdminController.userlist.get(AlbumController.currentUser).getAlbumlistSize();
+		for(int i = 0; i <size; i++){
+			BorderPane bp = (BorderPane)photoListGP.getChildren().get(i);
+			bp.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.NONE, CornerRadii.EMPTY, new BorderWidths(2))));
+		}
+	}
+	
+	public void recaption(){
+		Dialog<String> dialog = new TextInputDialog("Enter a new caption.");
+		dialog.setHeaderText("Recaption Photo");
+		dialog.setTitle("Modify Photo");
+		Optional<String> result = dialog.showAndWait();
+		
+		if(result.isPresent()){
+			AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhoto(selected).setCaption(result.get());
+			photoListGP.getChildren().remove(0, numPhoto);
+			loadPhotos();
+		}
+	}
+	
+	public void tag(){
+		
+	}
 
+	public void delete(){
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Modify Album");
+		alert.setHeaderText("Delete Album");
+		alert.setContentText("Are you sure you want to delete this album?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			photoListGP.getChildren().remove(0, numPhoto);
+			AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).remove(selected);
+			numPhoto--;
+			loadPhotos();
+			
+		} else {
+		    // ... user chose CANCEL or closed the dialog
+		}
+		
+		
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -312,6 +380,20 @@ public class ThumbnailController implements Initializable{
 		endDate.setVisible(false);
 		tagBtn.setToggleGroup(group);
 		dateBtn.setToggleGroup(group);
+		
+		photoOption.setOnAction(e->{
+			if(photoOption.getSelectionModel().getSelectedIndex() == 0){
+				recaption();
+			}
+			else if(photoOption.getSelectionModel().getSelectedIndex() == 1){
+				tag();
+			}
+			else if(photoOption.getSelectionModel().getSelectedIndex() == 2){
+				delete();
+			}
+			
+			photoOption.setValue(null);
+		});
 		
 	}
 	
