@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import application.Photo;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -13,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import model.Photo;
 
 public class PhotoController implements Initializable{
 	

@@ -15,6 +15,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
+import model.User;
 
 public class AdminController implements Initializable {
 	

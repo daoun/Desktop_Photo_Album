@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import application.Photo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +28,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Photo;
 
 public class ThumbnailController implements Initializable{
 
