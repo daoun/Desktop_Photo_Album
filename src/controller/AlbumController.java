@@ -20,10 +20,16 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
@@ -79,10 +85,15 @@ public class AlbumController implements Initializable{
         
         albumListGP.add(albumBP, col, row);
         
-        albumBP.setOnMouseClicked(e ->{
-        	
-        	openAlbum(name, row, col);
-
+        albumListGP.setOnMouseClicked(e ->{
+        	System.out.println("num click = "+ e.getClickCount());
+        	if (e.getClickCount() == 1) {
+        		System.out.println("Clicked once");
+        		
+        	}
+        	else if(e.getClickCount() == 2){
+        		openAlbum(name, row, col);
+        	}
         });
 		
 		numAlbum++;
@@ -168,9 +179,16 @@ public class AlbumController implements Initializable{
             
             albumListGP.add(albumBP, col, row);
             
-            albumBP.setOnMouseClicked(e ->{
-            	
-            	openAlbum(name, row, col);
+            albumListGP.setOnMouseClicked(e ->{
+            	System.out.println("num click = "+ e.getClickCount());
+            	if (e.getClickCount() == 1) {
+            		System.out.println("Clicked once");
+            		albumBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
+            		
+            	}
+            	else if(e.getClickCount() == 2){
+            		openAlbum(name, row, col);
+            	}
 
             });
         }
