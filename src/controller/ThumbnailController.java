@@ -225,7 +225,6 @@ public class ThumbnailController implements Initializable{
 		
 		String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
 		
-		
 		String caption = getCaption();
 		Photo photo = new Photo(caption);
 		
