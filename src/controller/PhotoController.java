@@ -20,8 +20,6 @@ import model.Photo;
 
 public class PhotoController implements Initializable{
 	
-	public static int currentPhoto;
-	
 	@FXML private Text captionT;
 	@FXML private Text dateT;
 	@FXML private Text tagT;
@@ -30,7 +28,15 @@ public class PhotoController implements Initializable{
 	@FXML private Button beforeBtn;
 	@FXML private Button nextBtn;
 	
+	/**
+	 * Stores index of the current photo being shown in the photolist 
+	 */
+	public static int currentPhoto;
 	
+	/**
+	 * Called by the before Button.
+	 * Shows detail of the photo before the current photo in the photolist.
+	 */
 	public void before(){
 		if(currentPhoto == 0){
 			return;
@@ -43,6 +49,10 @@ public class PhotoController implements Initializable{
 		initialize(loc,res);
 	}
 	
+	/**
+	 * Called by the next Button.
+	 * Shows detail of the photo after the current photo in the photolist.
+	 */
 	public void next(){
 		if(currentPhoto == AdminController.userlist.get(AlbumController.currentUser).
 				getAlbum(ThumbnailController.currentAlbum).getPhotolistSize() - 1){
@@ -74,12 +84,6 @@ public class PhotoController implements Initializable{
 		if(photo.getTaglistSize() > 0){
 			tag = TagController.putTogetherTags(photo.getTaglist());
 		    tagT.setText(tag);
-		
 		}
-		
 	}
-
-	
-	
-	
 }

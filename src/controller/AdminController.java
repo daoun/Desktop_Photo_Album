@@ -1,7 +1,6 @@
 package controller;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -18,11 +17,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import model.Album;
 import model.User;
 
 public class AdminController implements Initializable {
-	
+	/**
+	 * Stores list of users.
+	 */
 	public static ObservableList<User> userlist = FXCollections.observableArrayList(); 
 	
 	@FXML private AnchorPane adminStage;
@@ -35,8 +35,12 @@ public class AdminController implements Initializable {
 		userLV.setItems(userlist);
 	}
 	
-	public void addUser(ActionEvent e){
-		
+	/**
+	 * Called by the addUser button.
+	 * Adds the prompted user to the list of users.
+	 * Checks for duplicate user names.
+	 */
+	public void addUser(){
 		User newUser;
 		Dialog<String> dialog = new TextInputDialog("Enter a user name.");
 		dialog.setHeaderText("Create User");
@@ -46,9 +50,7 @@ public class AdminController implements Initializable {
 		if (result.isPresent()) {
 			    entered = result.get();
 		}
-		
 		entered = entered.replaceAll("\\s+","");
-		
 		
 		if(result.isPresent()){
 			if(!duplicates(result.get())){
@@ -59,13 +61,17 @@ public class AdminController implements Initializable {
 				else{
 					noNameAlert();
 				}
-
 			}
-				
 		}
-				
 	}
 	
+	/**
+	 * Checks for duplicate user name stored in userlist.
+	 * 
+	 * @param name the name of the new user
+	 * @return true if there is a duplicate user,
+	 * 			false otherwise
+	 */
 	public boolean duplicates(String name){
 		for(int i = 0; i < userlist.size(); i++){
 			if(userlist.get(i).getName().equals(name)){
@@ -76,6 +82,9 @@ public class AdminController implements Initializable {
 		return false;
 	}
 	
+	/**
+	 * Alerts the user if there is a duplicate user name.
+	 */
 	public void warnDuplicate(){
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Duplicate Warning");
@@ -85,6 +94,9 @@ public class AdminController implements Initializable {
 		alert.showAndWait();
 	}
 	
+	/**
+	 * Alerts the user if there is empty input for name.
+	 */
 	public void noNameAlert(){
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("No Name Warning");
@@ -94,20 +106,24 @@ public class AdminController implements Initializable {
 		alert.showAndWait();
 	}
 	
-	
-	public void back(ActionEvent e){
-		
+	/**
+	 * Called by the back button.
+	 * Brings user back to the log in stage.
+	 */
+	public void back(){
 		LoginController.adminStage.close();
 		PhotoAlbum.loginStage.show();
-		
 	}
 	
-	public void deleteUser(ActionEvent e){
+	/**
+	 * Called by the delete button.
+	 * Deletes the selected user.
+	 */
+	public void deleteUser(){
 		int selected = userLV.getSelectionModel().getSelectedIndex();
 		if(selected < 0){
 			return;
 		}
 		userlist.remove(selected);
 	}
-
 }

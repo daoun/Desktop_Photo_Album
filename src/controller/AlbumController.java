@@ -41,8 +41,6 @@ import model.Album;
 import model.User;
 
 public class AlbumController implements Initializable{
-
-	public static Stage thumbnailStage;
 	@FXML private Button albumAddBtn;
 	@FXML private Button backBtn;
 	@FXML private Text userTitle;
@@ -53,19 +51,33 @@ public class AlbumController implements Initializable{
 	@FXML private String detail;
 	@FXML private ChoiceBox<String> albumOption;
 	
+	/**
+	 * Stores the thumbnail stage
+	 */
+	public static Stage thumbnailStage;
+	/**
+	 * Keeps track of number of albums
+	 */
 	public int numAlbum = 0;
+	/**
+	 * Denotes the selected album
+	 */
 	public static int selected;
+	/**
+	 * Stores index of the current user being used in the userlist 
+	 */
 	public static int currentUser;
 	
-	public void addAlbum(ActionEvent event){
-		
+	/**
+	 * Called by the addAlbum Button.
+	 * Adds the new album prompted by the user.
+	 * Checks for duplicate album name and empty name string.
+	 */
+	public void addAlbum(){
 		String name = createAlbum();
 		if(name == null){
 			return;
 		}
-		
-		// check if the album name is unique,
-		// if not alert that it is not unique
 		
 		Album album = new Album(name);
 		AdminController.userlist.get(currentUser).addAlbum(album);
@@ -109,9 +121,15 @@ public class AlbumController implements Initializable{
 		numAlbum++;
 	}
 	
+	/**
+	 * Opens the stage of the selected album.
+	 * 
+	 * @param name album name
+	 * @param row current row in the GridPane
+	 * @param col current col in the GridPane
+	 */
 	public void openAlbum(String name, int row, int col){
 		try {
-			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/thumbnail.fxml"));
 			
@@ -119,7 +137,6 @@ public class AlbumController implements Initializable{
 			ThumbnailController.currentAlbum = index;
 			
 			AnchorPane root = (AnchorPane)loader.load();
-        	
 			Stage stage = new Stage();
             Scene scene = new Scene(root);
 			
@@ -130,17 +147,19 @@ public class AlbumController implements Initializable{
             thumbnailStage = stage;
             LoginController.albumStage.close();
             stage.show();
-			
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-    	
-    	
 	}
 	
+	/**
+	 * Prompts the user to input the name of the new album to create a new Album.
+	 * 
+	 * @return name of the new album, 
+	 * 		null if there is a duplicate or if there is no name
+	 */
 	public static String createAlbum(){
-		Dialog<String> dialog = new TextInputDialog("Enter a user name.");
+		Dialog<String> dialog = new TextInputDialog("Enter a album name.");
 		dialog.setHeaderText("Create Album");
 		dialog.setTitle("Photo Album");
 		Optional<String> result = dialog.showAndWait();
@@ -158,6 +177,9 @@ public class AlbumController implements Initializable{
 		return null;
 	}
 	
+	/**
+	 * Loads albums to the GridPane with the thumbnail of the first photo in the album and the name of the album.
+	 */
 	public void loadAlbums(){
         int i = 0;
         for(i = 0; i < AdminController.userlist.get(currentUser).getAlbumlistSize(); i++){
@@ -197,23 +219,26 @@ public class AlbumController implements Initializable{
             		selected = row*3 + col;
             		clearSelected();
             		albumBP.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
-            		
-                	
             	}
             	else if(e.getClickCount() == 2){
             		openAlbum(name, row, col);
             	}
-
             });
         }
-        
 	}
 	
-	public void back(ActionEvent e){
+	/**
+	 * Called by the back button.
+	 * Brings user back to the log in stage.
+	 */
+	public void back(){
 		LoginController.albumStage.close();
 		PhotoAlbum.loginStage.show();
 	}
 	
+	/**
+	 * Clears all borders of the selected item.
+	 */
 	public void clearSelected(){
 		int size = AdminController.userlist.get(AlbumController.currentUser).getAlbumlistSize();
 		for(int i = 0; i <size; i++){
@@ -222,6 +247,13 @@ public class AlbumController implements Initializable{
 		}
 	}
 	
+	/**
+	 * Checks for duplicate album name stored in albumlist.
+	 * 
+	 * @param name the name of the new user
+	 * @return true if there is a duplicate user,
+	 * 			false otherwise
+	 */
 	public static boolean duplicates(String name){
 		List<Album> list = AdminController.userlist.get(AlbumController.currentUser).getAlbumlist();
 		for(int i = 0; i < list.size(); i++){
@@ -233,6 +265,9 @@ public class AlbumController implements Initializable{
 		return false;
 	}
 	
+	/**
+	 * Alerts the user if there is a duplicate album name.
+	 */
 	public static void warnDuplicate(){
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Duplicate Warning");
@@ -242,6 +277,9 @@ public class AlbumController implements Initializable{
 		alert.showAndWait();
 	}
 	
+	/**
+	 * Alerts the user if there is empty input for name.
+	 */
 	public static void noNameAlert(){
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("No Name Warning");
@@ -251,9 +289,12 @@ public class AlbumController implements Initializable{
 		alert.showAndWait();
 	}
 	
+	/**
+	 * Called when rename is selected in the drop down menu.
+	 * Prompts the user to rename the selected album.
+	 * Checks for duplicate album name.
+	 */
 	public void rename(){
-		
-		
 		Dialog<String> dialog = new TextInputDialog("Enter a new name for the album.");
 		dialog.setHeaderText("Rename Album");
 		dialog.setTitle("Modify Album");
@@ -263,11 +304,13 @@ public class AlbumController implements Initializable{
 			AdminController.userlist.get(AlbumController.currentUser).getAlbum(selected).setName(result.get());
 			albumListGP.getChildren().remove(0, numAlbum);
 			loadAlbums();
-			
 		}
-		
 	}
 	
+	/**
+	 * Called when delete is selected in the drop down menu.
+	 * Asks the user to confirm to delete selected album.
+	 */
 	public void delete(){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Modify Album");
@@ -280,23 +323,19 @@ public class AlbumController implements Initializable{
 			AdminController.userlist.get(AlbumController.currentUser).remove(selected);
 			numAlbum--;
 			loadAlbums();
-			
-		} else {
-		    // ... user chose CANCEL or closed the dialog
 		}
-		
-		
 	}
 	
+	/**
+	 * Called when detail is selected in the drop down menu.
+	 * Shows name, number of photos, oldest photo date, and range of dates of the photos in the album.
+	 */
 	public void details(){
-		
 		try {
-			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/detail.fxml"));
 			
 			AnchorPane root = (AnchorPane)loader.load();
-        	
 			Stage stage = new Stage();
             Scene scene = new Scene(root);
 			
@@ -304,10 +343,7 @@ public class AlbumController implements Initializable{
             stage.setResizable(false);  
             stage.setTitle("Detail");
             stage.show();
-            
-			
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -316,32 +352,23 @@ public class AlbumController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		userTitle.setText(LoginController.username);
 		albumListSP.setHbarPolicy(ScrollBarPolicy.NEVER);
-		
 		numAlbum = AdminController.userlist.get(currentUser).getAlbumlistSize();
 		
 		if(AdminController.userlist.get(currentUser).getAlbumlistSize() > 0){
 			loadAlbums();
 		}
-		
 		clearSelected();
-		
 		
 		albumOption.setOnAction(e->{
 			if(albumOption.getSelectionModel().getSelectedIndex() == 0){
 				rename();
-			}
-			else if(albumOption.getSelectionModel().getSelectedIndex() == 1){
+			}else if(albumOption.getSelectionModel().getSelectedIndex() == 1){
 				delete();
 			}else if(albumOption.getSelectionModel().getSelectedIndex() == 2){
 				details();
 			}
-			
 			albumOption.setValue(null);
 		});
-		
 	}
-	
-	
-	
 }
 

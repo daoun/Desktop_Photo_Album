@@ -18,11 +18,13 @@ public class MoveController implements Initializable{
 	@FXML private Button cancelBtn;
 	@FXML private ListView<String> listLV;
 	
-	public final ObservableList<String> list = FXCollections.observableArrayList();        
-	public int selected=0;
+	/**
+	 * Stores the list of the names of the albums in the userlist
+	 */
+	public final ObservableList<String> list = FXCollections.observableArrayList(); 
 	
 	public void move(){
-		selected = listLV.getSelectionModel().getSelectedIndex();
+		int selected = listLV.getSelectionModel().getSelectedIndex();
 		
 		Photo photo = AdminController.userlist.get(AlbumController.currentUser).
 			getAlbum(ThumbnailController.currentAlbum).getPhoto(ThumbnailController.selected);
@@ -33,16 +35,17 @@ public class MoveController implements Initializable{
 		AdminController.userlist.get(AlbumController.currentUser).
 			getAlbum(selected).addPhoto(photo);
 		
-		
-		
 		cancel();
 	}
 	
+	/**
+	 * Called by the cancel Button.
+	 * Quits the move job and returns to the thumbnail stage.
+	 */
 	public void cancel(){		
 		ThumbnailController.moveStage.close();
 		AlbumController.thumbnailStage.show();
 	}
-	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -52,10 +55,6 @@ public class MoveController implements Initializable{
 		for(int i = 0; i<albums.size(); i++){
 			list.add(albums.get(i).getName());
 		}
-		
 		listLV.setItems(list);
 	}
-	
-	
-	
 }

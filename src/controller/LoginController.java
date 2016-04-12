@@ -28,10 +28,15 @@ public class LoginController implements Initializable{
 	
 	public static String username = "";
 	
-	public void LoginBtn(ActionEvent e){
+	/**
+	 * Called by the loginBtn.
+	 * It logs in the inputed user if the user exists in the userlist.
+	 * If input is admin, it opens the admin stage.
+	 * If input is any other, it opens the list of albums stage.
+	 */
+	public void LoginBtn(){
 		if(usernameTF.getText().equals("admin")){
 			try {
-				
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("/view/admin.fxml"));
 				
@@ -47,8 +52,6 @@ public class LoginController implements Initializable{
 	            adminStage = stage;
 	            stage.show();
 	            PhotoAlbum.loginStage.close();
-	            
-				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -58,7 +61,6 @@ public class LoginController implements Initializable{
 			int i=0;
 			for(i = 0; i < AdminController.userlist.size(); i++){
 				if(AdminController.userlist.get(i).getName().equals(username)){
-					
 					AlbumController.currentUser = i;
 					break;
 				}
@@ -69,12 +71,10 @@ public class LoginController implements Initializable{
 				return;
 			}
             try {
-				
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource("/view/album.fxml"));
 				
 				AnchorPane root = (AnchorPane)loader.load();
-				
 				Stage stage = new Stage();
 	            Scene scene = new Scene(root);
 				
@@ -85,14 +85,15 @@ public class LoginController implements Initializable{
 	            albumStage = stage;
 	            stage.show();
 	            PhotoAlbum.loginStage.close();
-	            
-				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
 	}
 	
+	/**
+	 * Helper function that alerts the user that inputed user does not exist.
+	 */
 	public void userDoesNotExist(){
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Invalid User");
@@ -106,6 +107,4 @@ public class LoginController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		
 	}
-	
-
 }

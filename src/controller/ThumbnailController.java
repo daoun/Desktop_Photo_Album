@@ -33,10 +33,6 @@ import model.Photo;
 
 public class ThumbnailController implements Initializable{
 
-	public static Stage photoStage;
-	public static Stage tagStage;
-	public static Stage moveStage;
-	
 	@FXML private Button addPhoto;
 	@FXML private TextField tagBar;
 	@FXML private Button deletePhoto;
@@ -52,14 +48,45 @@ public class ThumbnailController implements Initializable{
 	@FXML private ScrollPane photoListSP;
 	@FXML private ChoiceBox<String> photoOption;
 
+	/**
+	 * toggles between date search and tag search
+	 */
 	final ToggleGroup group = new ToggleGroup();
+	/**
+	 * Stores the photo stage
+	 */
+	public static Stage photoStage;
+	/**
+	 * Stores the tag stage
+	 */
+	public static Stage tagStage;
+	/**
+	 * Stores the move stage
+	 */
+	public static Stage moveStage;
 	
+	/**
+	 * Stores the list of search photos.
+	 */
 	public List<Photo> searchedPhotos = new ArrayList<Photo>();
+	/**
+	 * Denates the selected photo in the GridPane
+	 */
 	public static int selected;
+	/**
+	 * Keeps track of the number of photos in the GridPane
+	 */
 	public int numPhoto = 0;
+	/**
+	 * Stores index of the current album being used in the albumlist 
+	 */
 	public static int currentAlbum;
 	
-	public void createAlbumWithSearch(ActionEvent event){
+	/**
+	 * Called by the CreateAlbumWithSearch Button.
+	 * Creates a new album with the searched result.
+	 */
+	public void createAlbumWithSearch(){
 		String name = AlbumController.createAlbum();
 		if(name == null){
 			return;
@@ -69,9 +96,12 @@ public class ThumbnailController implements Initializable{
 		AdminController.userlist.get(AlbumController.currentUser).addAlbum(al);
 	}
 	
-	
-	public void search(ActionEvent event){
-		
+	/**
+	 * Called by the search Button.
+	 * Searches the album with the specified date range or a tag.
+	 * Displays the result of the search into the GridPane.
+	 */
+	public void search(){
 		String text = "";
 		Album album = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum);
 		
@@ -123,48 +153,58 @@ public class ThumbnailController implements Initializable{
 		}
 	}
 	
-	public void showDate(ActionEvent event){
+	/**
+	 * Called by the toggle Button.
+	 * Shows the Start Date input.
+	 */
+	public void showDate(){
 		tagBar.setVisible(false);
 		startDate.setVisible(true);
 		
-		
 		final Callback<DatePicker, DateCell> dayCellFactory = 
-	            new Callback<DatePicker, DateCell>() {
-	                @Override
-	                public DateCell call(final DatePicker datePicker) {
-	                    return new DateCell() {
-	                        @Override
-	                        public void updateItem(LocalDate item, boolean empty) {
-	                            super.updateItem(item, empty);
-	                           
-	                            if (item.isBefore(
-	                                    startDate.getValue().plusDays(1))
-	                                ) {
-	                                    setDisable(true);
-	                                    setStyle("-fx-background-color: #ffc0cb;");
-	                            }   
-	                    }
-	                };
-	            }
+				new Callback<DatePicker, DateCell>() {
+			@Override
+			public DateCell call(final DatePicker datePicker) {
+				return new DateCell() {
+					@Override
+					public void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+
+						if (item.isBefore(
+								startDate.getValue().plusDays(1))
+								) {
+							setDisable(true);
+							setStyle("-fx-background-color: #ffc0cb;");
+						}   
+					}
+				};
+			}
 	     };
-	     
 	     endDate.setDayCellFactory(dayCellFactory);
-		
 	}
 	
-	public void showEndDate(ActionEvent event){
+	/**
+	 * Shows the End Date input.
+	 */
+	public void showEndDate(){
 		endDate.setVisible(true);
 	}
 	
-	public void hideDate(ActionEvent event){
+	/**
+	 * Hides the Start and End Date inputs.
+	 */
+	public void hideDate(){
 		startDate.setVisible(false);
 		endDate.setVisible(false);
 		tagBar.setVisible(true);
 	}
 	
-	public void addPhoto(ActionEvent event){
-		
-		
+	/**
+	 * Called by the addPhoto Button.
+	 * Adds the photo by browsing through your directory and inputing a caption.
+	 * Added on to GridPane.
+	 */
+	public void addPhoto(){
 		final FileChooser fc = new FileChooser();
 		String path = "";
 		File file = fc.showOpenDialog(AlbumController.thumbnailStage);
@@ -176,11 +216,9 @@ public class ThumbnailController implements Initializable{
 		}
 		
 		String caption = getCaption();
-		
 		Photo photo = new Photo(caption);
 		
 		long millisec = file.lastModified();
-
 		photo.setDate(new Date(millisec));
 		
 		int row = numPhoto/5;
@@ -225,18 +263,23 @@ public class ThumbnailController implements Initializable{
 		numPhoto++;
 	}
 	
+	/**
+	 * Opens the photo detail stage of the selected photo.
+	 * 
+	 * @param name caption of the photo
+	 * @param row current row in the GridPane
+	 * @param col current col in the GridPane
+	 */
 	public void openPhoto(String name, int row, int col){
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/photo.fxml"));
 			
-			
 			int index = row*5 + col;
 			PhotoController.currentPhoto = index;
 			
 			AnchorPane root = (AnchorPane)loader.load();
-			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
         	
 			Stage stage = new Stage();
             Scene scene = new Scene(root);
@@ -248,17 +291,15 @@ public class ThumbnailController implements Initializable{
             photoStage = stage;
             
             stage.show();
-            //currentStage.close();
-            
-			
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-    	
-    	
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getCaption(){
 		Dialog<String> dialog = new TextInputDialog("Enter a caption. ");
 		dialog.setHeaderText("Add Caption");
@@ -272,6 +313,10 @@ public class ThumbnailController implements Initializable{
 		}
 	}
 	
+	/**
+	 * Loads the photos in photos to the GridPane
+	 * @param photos list of the photos
+	 */
 	public void loadPhotos(List<Photo> photos){
         int i = 0;
         for(i = 0; i < photos.size(); i++){
@@ -326,13 +371,18 @@ public class ThumbnailController implements Initializable{
         
 	}
 	
-	
-	
-	public void back(ActionEvent e){
+	/**
+	 * Called by the back button.
+	 * Brings user back to the albums stage.
+	 */
+	public void back(){
 		AlbumController.thumbnailStage.close();
 		LoginController.albumStage.show();
 	}
 	
+	/**
+	 * Clears all borders of the selected item.
+	 */
 	public void clearSelected(){
 		int size = AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolistSize();
 		for(int i = 0; i <size; i++){
@@ -341,6 +391,10 @@ public class ThumbnailController implements Initializable{
 		}
 	}
 	
+	/**
+	 * Called when recaption is selected in the drop down menu.
+	 * Prompts the user to edit the caption.
+	 */
 	public void recaption(){
 		Dialog<String> dialog = new TextInputDialog("Enter a new caption.");
 		dialog.setHeaderText("Recaption Photo");
@@ -354,6 +408,10 @@ public class ThumbnailController implements Initializable{
 		}
 	}
 	
+	/**
+	 * Called when edit tag is selected in the drop down menu.
+	 * Prompts the user to edit the tags.
+	 */
 	public void tag(){
 		try {
 			
@@ -361,7 +419,6 @@ public class ThumbnailController implements Initializable{
 			loader.setLocation(getClass().getResource("/view/tag.fxml"));
 			
 			AnchorPane root = (AnchorPane)loader.load();
-			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
         	
 			Stage stage = new Stage();
             Scene scene = new Scene(root);
@@ -373,15 +430,15 @@ public class ThumbnailController implements Initializable{
             tagStage = stage;
             
             stage.show();
-            //currentStage.close();
-            
-			
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Called when move is selected in the drop down menu.
+	 * Opens a move stage which show the list of the albums the user can choose from.
+	 */
 	public void move(){
 		try {
 			
@@ -389,8 +446,6 @@ public class ThumbnailController implements Initializable{
 			loader.setLocation(getClass().getResource("/view/move.fxml"));
 			
 			AnchorPane root = (AnchorPane)loader.load();
-			//Stage currentStage = (Stage) loginStage.getScene().getWindow();
-        	
 			Stage stage = new Stage();
             Scene scene = new Scene(root);
 			
@@ -401,15 +456,15 @@ public class ThumbnailController implements Initializable{
             moveStage = stage;
             
             stage.show();
-            //currentStage.close();
-            
-			
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 
+	/**
+	 * Called when delete is selected in the drop down menu.
+	 * Asks the user to confirm deleting the selected photo.
+	 */
 	public void delete(){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Modify Photo");
@@ -422,12 +477,19 @@ public class ThumbnailController implements Initializable{
 			AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).remove(selected);
 			numPhoto--;
 			loadPhotos(AdminController.userlist.get(AlbumController.currentUser).getAlbum(currentAlbum).getPhotolist());
-			
-		} else {
-		    // ... user chose CANCEL or closed the dialog
-		}
-		
-		
+		} 
+	}
+	
+	/**
+	 * alerts the user that the inputed date does not exists.
+	 */
+	public void dateDoesNotExist(){
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Invalid Date");
+		alert.setHeaderText(null);
+		alert.setContentText("Please select a valid date range");
+
+		alert.showAndWait();
 	}
 	
 	@Override
@@ -462,17 +524,5 @@ public class ThumbnailController implements Initializable{
 			
 			photoOption.setValue(null);
 		});
-		
 	}
-	
-	public void dateDoesNotExist(){
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Invalid Date");
-		alert.setHeaderText(null);
-		alert.setContentText("Please select a valid date range");
-
-		alert.showAndWait();
-	}
-	
-	
 }

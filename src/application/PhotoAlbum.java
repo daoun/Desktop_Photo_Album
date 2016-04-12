@@ -20,7 +20,9 @@ import model.*;
 
 
 public class PhotoAlbum extends Application {
-	
+	/**
+	 * Stores the login stage
+	 */
 	public static Stage loginStage;
 
 	@SuppressWarnings("unchecked")

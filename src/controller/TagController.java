@@ -16,6 +16,10 @@ public class TagController implements Initializable{
 	@FXML private Button saveBtn;
 	@FXML private Button cancelBtn;
 	
+	/**
+	 * Called by the save Button.
+	 * Splits the tags and stores them into the taglist field in the photo.
+	 */
 	public void save(){
 		String s = tagTA.getText();
 		List<String> list = splitTags(s);
@@ -26,6 +30,10 @@ public class TagController implements Initializable{
 		cancel();
 	}
 	
+	/**
+	 * Called by the cancel Button.
+	 * Quits the edit tag job and returns to the thumbnail stage.
+	 */
 	public void cancel(){
 		tagTA.setText("");
 		
@@ -33,6 +41,11 @@ public class TagController implements Initializable{
 		AlbumController.thumbnailStage.show();
 	}
 	
+	/**
+	 * Splits the tags inputed in the TextArea
+	 * @param s text inputed by the user in the TextArea
+	 * @return list of the tags
+	 */
 	public static List<String> splitTags(String s){
 		List<String> list = new ArrayList<String>();
 		
@@ -47,10 +60,14 @@ public class TagController implements Initializable{
 				list.remove(i);
 			}
 		}
-
 		return list;
 	}
 	
+	/**
+	 * Puts all of the tags in the taglist into a string.
+	 * @param list contains list of tags
+	 * @return concatenated list of tag string
+	 */
 	public static String putTogetherTags(List<String> list){
 		String all = "";
 		for(int i = 0; i <list.size(); i++){
@@ -58,9 +75,9 @@ public class TagController implements Initializable{
 		}
 		return all;
 	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		List<String> list = AdminController.userlist.get(AlbumController.currentUser).
 				getAlbum(ThumbnailController.currentAlbum).getPhoto(ThumbnailController.selected).getTaglist();
 		
@@ -71,5 +88,4 @@ public class TagController implements Initializable{
 			tagTA.appendText(putTogetherTags(list));
 		}
 	}
-
 }

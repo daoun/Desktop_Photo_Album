@@ -19,7 +19,6 @@ public class DetailController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		albumName.setText(AdminController.userlist.get(AlbumController.currentUser).getAlbum(AlbumController.selected).getName());
 		numPhoto.setText(Integer.toString(AdminController.userlist.get(AlbumController.currentUser).getAlbum(AlbumController.selected).getPhotolistSize()));
 		
@@ -32,10 +31,13 @@ public class DetailController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Finds the oldest dated photo in the album.
+	 * @return date of the oldest photo
+	 */
 	public String findOldestDate(){
 		
 		Album currentAlbum = AdminController.userlist.get(AlbumController.currentUser).getAlbum(AlbumController.selected);
-		
 		Date oldestDate = null;
 		
 		for(Photo p : currentAlbum.getPhotolist()){
@@ -43,25 +45,23 @@ public class DetailController implements Initializable {
 				oldestDate = p.getDate();
 				continue;
 			}
-			
 			if(p.getDate().before(oldestDate)){
 				oldestDate = p.getDate();
 			}
-			
 		}
-		
 		if(oldestDate == null){
 			return null;
 		}
-		
 		return oldestDate.toString();
-		
 	}
 	
+	/**
+	 * Finds the newest dated photo in the album.
+	 * @return date of the newest photo
+	 */
 	public String findNewestDate(){
 		
 		Album currentAlbum = AdminController.userlist.get(AlbumController.currentUser).getAlbum(AlbumController.selected);
-		
 		Date newestDate = null;
 		
 		for(Photo p : currentAlbum.getPhotolist()){
@@ -69,7 +69,6 @@ public class DetailController implements Initializable {
 				newestDate = p.getDate();
 				continue;
 			}
-			
 			if(p.getDate().after(newestDate)){
 				newestDate = p.getDate();
 			}
@@ -78,10 +77,6 @@ public class DetailController implements Initializable {
 		if(newestDate == null){
 			return null;
 		}
-		
 		return newestDate.toString();
-		
 	}
-	
-
 }
