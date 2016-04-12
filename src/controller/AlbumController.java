@@ -38,6 +38,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Album;
+import model.User;
 
 public class AlbumController implements Initializable{
 
@@ -143,15 +144,18 @@ public class AlbumController implements Initializable{
 		dialog.setHeaderText("Create Album");
 		dialog.setTitle("Photo Album");
 		Optional<String> result = dialog.showAndWait();
-		if(!duplicates(result.get()) && result.isPresent()){
-			
-			return result.get();
-		}
-		else{
-			return null;
-		}
 		
-		
+		if(result.isPresent()){
+			if(!duplicates(result.get())){
+				if(result.get().length() != 0){
+					return result.get();
+				}
+				else{
+					noNameAlert();
+				}
+			}
+		}
+		return null;
 	}
 	
 	public void loadAlbums(){
@@ -231,9 +235,18 @@ public class AlbumController implements Initializable{
 	
 	public static void warnDuplicate(){
 		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Warning");
+		alert.setTitle("Duplicate Warning");
 		alert.setHeaderText("Invalid");
 		alert.setContentText("There exists an album with the same name.");
+
+		alert.showAndWait();
+	}
+	
+	public static void noNameAlert(){
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("No Name Warning");
+		alert.setHeaderText("Invalid");
+		alert.setContentText("You need to enter at least one character.");
 
 		alert.showAndWait();
 	}

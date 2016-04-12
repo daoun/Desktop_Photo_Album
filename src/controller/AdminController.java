@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -10,11 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import model.Album;
 import model.User;
 
 public class AdminController implements Initializable {
@@ -45,11 +49,51 @@ public class AdminController implements Initializable {
 		
 		entered = entered.replaceAll("\\s+","");
 		
-		if(entered.length() != 0){
-			newUser = new User(entered);
-			userlist.add(newUser);
-		}			
+		
+		if(result.isPresent()){
+			if(!duplicates(result.get())){
+				if(entered.length() != 0){
+					newUser = new User(entered);
+					userlist.add(newUser);
+				}
+				else{
+					noNameAlert();
+				}
+
+			}
+				
+		}
+				
 	}
+	
+	public boolean duplicates(String name){
+		for(int i = 0; i < userlist.size(); i++){
+			if(userlist.get(i).getName().equals(name)){
+				warnDuplicate();
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void warnDuplicate(){
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Duplicate Warning");
+		alert.setHeaderText("Invalid");
+		alert.setContentText("There exists a user with the same name.");
+
+		alert.showAndWait();
+	}
+	
+	public void noNameAlert(){
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("No Name Warning");
+		alert.setHeaderText("Invalid");
+		alert.setContentText("You need to enter at least one character.");
+
+		alert.showAndWait();
+	}
+	
 	
 	public void back(ActionEvent e){
 		
