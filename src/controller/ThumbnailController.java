@@ -241,16 +241,6 @@ public class ThumbnailController implements Initializable{
 			Stage stage = new Stage();
             Scene scene = new Scene(root);
 			
-            root.setOnKeyPressed(e -> {
-            	System.out.println(e.getCode());
-            	if (e.getCode() == KeyCode.RIGHT) { // don't use toString here!!!
-					System.out.println("right");
-				} else if (e.getCode() == KeyCode.LEFT) {
-					System.out.println("left");
-				}
-            });
-            
-            
             stage.setScene(scene);  
             stage.setResizable(false);  
             stage.setTitle(name);

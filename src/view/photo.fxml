@@ -9,18 +9,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.FXCollections ?>
 
-<AnchorPane id="photoAP" prefHeight="450.0" prefWidth="790.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PhotoController">
+<AnchorPane id="photoAP" prefHeight="450.0" prefWidth="820.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PhotoController">
    <children>
       <GridPane layoutX="26.0" layoutY="74.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="0.0" prefHeight="430.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="photoIV" fitHeight="430.0" fitWidth="340.0" pickOnBounds="true" preserveRatio="true" />
             <AnchorPane prefHeight="430.0" prefWidth="410.0" GridPane.columnIndex="1">
                <children>
                   <Text fill="#aaaaaa" layoutX="46.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption :" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="100.0">
@@ -48,14 +47,32 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text fx:id="tagT" fill="WHITE" layoutX="69.0" layoutY="249.0" 
-                  		strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="370"
-                  		AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="25.0" 
-                  		AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="230.0">
+                  <Text fx:id="tagT" fill="WHITE" layoutX="69.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="370" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="230.0">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="430.0" maxWidth="400.0" prefHeight="430.0" prefWidth="400.0">
+               <children>
+                  <Button fx:id="beforeBtn" text="&lt;" onAction="#before"
+                  		layoutX="-23.0" layoutY="181.0" 
+                  		mnemonicParsing="false" style="-fx-background-color: black;" 
+                  		textFill="WHITE" AnchorPane.topAnchor="183.0">
+                     <font>
+                        <Font name="Courier New Bold" size="34.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="nextBtn" text="&gt;" onAction="#next"
+                  		layoutX="363.0" layoutY="183.0" 
+                  		mnemonicParsing="false" style="-fx-background-color: black;" 
+                  		textFill="WHITE" AnchorPane.topAnchor="183.0">
+                     <font>
+                        <Font name="Courier New Bold" size="34.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="photoIV" fitHeight="430.0" fitWidth="340.0" layoutX="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="55.0" />
                </children>
             </AnchorPane>
          </children>
