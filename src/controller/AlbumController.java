@@ -40,6 +40,11 @@ import javafx.stage.Stage;
 import model.Album;
 import model.User;
 
+/**
+ * This controller controls the Album stage
+ * @author Capki Kim, Daoun Oh
+ *
+ */
 public class AlbumController implements Initializable{
 	@FXML private Button albumAddBtn;
 	@FXML private Button backBtn;

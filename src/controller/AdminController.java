@@ -19,6 +19,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import model.User;
 
+/**
+ * This controller controls the Admin stage
+ * @author Capki Kim, Daoun Oh
+ *
+ */
 public class AdminController implements Initializable {
 	/**
 	 * Stores list of users.
@@ -65,6 +70,8 @@ public class AdminController implements Initializable {
 		}
 	}
 	
+	
+	
 	/**
 	 * Checks for duplicate user name stored in userlist.
 	 * 
@@ -76,6 +83,10 @@ public class AdminController implements Initializable {
 		for(int i = 0; i < userlist.size(); i++){
 			if(userlist.get(i).getName().equals(name)){
 				warnDuplicate();
+				return true;
+			}
+			else if(userlist.get(i).getName().equals("admin")){
+				checkAdmin();
 				return true;
 			}
 		}
@@ -90,6 +101,18 @@ public class AdminController implements Initializable {
 		alert.setTitle("Duplicate Warning");
 		alert.setHeaderText("Invalid");
 		alert.setContentText("There exists a user with the same name.");
+
+		alert.showAndWait();
+	}
+	
+	/**
+	 * Alerts the user if the new user name was admin.
+	 */
+	public void checkAdmin(){
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Invalid Name Warning");
+		alert.setHeaderText("Invalid");
+		alert.setContentText("You cannot set ADMIN as your user name.");
 
 		alert.showAndWait();
 	}

@@ -31,6 +31,11 @@ import javafx.util.Callback;
 import model.Album;
 import model.Photo;
 
+/**
+ * This controller controls the Thumbnail stage
+ * @author Capki Kim, Daoun Oh
+ *
+ */
 public class ThumbnailController implements Initializable{
 
 	@FXML private Button addPhoto;
@@ -297,8 +302,9 @@ public class ThumbnailController implements Initializable{
 	}
 	
 	/**
+	 * Prompts user to input caption for a photo.
 	 * 
-	 * @return
+	 * @return returns the inputed caption
 	 */
 	public String getCaption(){
 		Dialog<String> dialog = new TextInputDialog("Enter a caption. ");
@@ -331,15 +337,7 @@ public class ThumbnailController implements Initializable{
             }
             BorderPane photoBP = new BorderPane();
             
-            File f = new File(photos.get(i).getURL());
-    		
-            ImageView image;
-            
-            if(!f.exists()){
-    			image = new ImageView("/view/no_photo.png");
-    		}else{
-    			image = new ImageView(photos.get(i).getURL());
-    		}
+            ImageView image = new ImageView(photos.get(i).getURL());
             
             image.setFitHeight(100);
             image.setFitWidth(100);

@@ -18,6 +18,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Photo;
 
+/**
+ * This controller controls the Photo stage (for Thumbnail)
+ * @author Capki Kim, Daoun Oh
+ *
+ */
 public class PhotoController implements Initializable{
 	
 	@FXML private Text captionT;

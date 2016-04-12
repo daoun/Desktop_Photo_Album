@@ -17,6 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * This controller controls the Login stage
+ * @author Capki Kim, Daoun Oh
+ *
+ */
 public class LoginController implements Initializable{
 
 	@FXML private Button loginBtn;

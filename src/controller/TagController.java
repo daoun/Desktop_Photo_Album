@@ -10,7 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-public class TagController implements Initializable{
+/**
+ * This controller controls the Tag stage (for Thumbnail)
+ * @author Capki Kim, Daoun Oh
+ *
+ */public class TagController implements Initializable{
 
 	@FXML private TextArea tagTA;
 	@FXML private Button saveBtn;

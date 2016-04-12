@@ -10,6 +10,11 @@ import javafx.scene.text.Text;
 import model.Album;
 import model.Photo;
 
+/**
+ * This controller controls the Detail stage (for Album)
+ * @author Capki Kim, Daoun Oh
+ *
+ */
 public class DetailController implements Initializable {
 
 	@FXML private Text albumName;

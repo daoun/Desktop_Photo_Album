@@ -13,6 +13,11 @@ import javafx.scene.control.ListView;
 import model.Album;
 import model.Photo;
 
+/**
+ * This controller controls the Move stage (for Thumbnail)
+ * @author Capki Kim, Daoun Oh
+ *
+ */
 public class MoveController implements Initializable{
 	@FXML private Button moveBtn;
 	@FXML private Button cancelBtn;
