@@ -67,7 +67,7 @@ public class AlbumController implements Initializable{
 	/**
 	 * Denotes the selected album
 	 */
-	public static int selected;
+	public static int selected = -1;
 	/**
 	 * Stores index of the current user being used in the userlist 
 	 */
@@ -365,6 +365,9 @@ public class AlbumController implements Initializable{
 		clearSelected();
 		
 		albumOption.setOnAction(e->{
+			if(selected == -1){
+				return;
+			}
 			if(albumOption.getSelectionModel().getSelectedIndex() == 0){
 				rename();
 			}else if(albumOption.getSelectionModel().getSelectedIndex() == 1){

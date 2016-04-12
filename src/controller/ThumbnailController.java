@@ -77,7 +77,7 @@ public class ThumbnailController implements Initializable{
 	/**
 	 * Denates the selected photo in the GridPane
 	 */
-	public static int selected;
+	public static int selected = -1;
 	/**
 	 * Keeps track of the number of photos in the GridPane
 	 */
@@ -213,12 +213,18 @@ public class ThumbnailController implements Initializable{
 		final FileChooser fc = new FileChooser();
 		String path = "";
 		File file = fc.showOpenDialog(AlbumController.thumbnailStage);
+		String base = System.getProperty("user.dir");
 		if(file != null){
 			path = file.getPath();
+			
+			//System.out.println(relative);
 		}
 		else{
 			return;
 		}
+		
+		String relative = new File(base).toURI().relativize(new File(path).toURI()).getPath();
+		
 		
 		String caption = getCaption();
 		Photo photo = new Photo(caption);
@@ -236,8 +242,8 @@ public class ThumbnailController implements Initializable{
             photoListGP.getRowConstraints().add(rc);
         }
         BorderPane photoBP = new BorderPane();
-        ImageView image = new ImageView("file:" + path);
-        photo.setURL("file:" + path);
+        ImageView image = new ImageView("file:" + relative);
+        photo.setURL("file:" + relative);
         image.setFitHeight(100);
         image.setFitWidth(100);
         
@@ -507,6 +513,9 @@ public class ThumbnailController implements Initializable{
 		dateBtn.setToggleGroup(group);
 		
 		photoOption.setOnAction(e->{
+			if(selected == -1){
+				return;
+			}
 			if(photoOption.getSelectionModel().getSelectedIndex() == 0){
 				recaption();
 			}

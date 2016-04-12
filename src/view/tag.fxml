@@ -26,7 +26,7 @@
       		AnchorPane.topAnchor="50.0" />
       		
       <Text fill="WHITE" layoutX="14.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" 
-      		text="** Please separate each tag with # and no spaces" 
+      		text="** Please put # infront of each tag"  
       		textAlignment="CENTER" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="235.0">
          <font>
             <Font size="11.0" />
